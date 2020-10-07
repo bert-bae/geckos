@@ -1,4 +1,4 @@
-# Cimex
+# Geckos
 
 Sample tracker to create and manage software epic tasks. Clone project of popular web apps such as Trello and JIRA.
 
