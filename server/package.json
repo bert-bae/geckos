@@ -1,0 +1,16 @@
+{
+  "name": "gecko-server",
+  "version": "1.0.0",
+  "description": "Backend service for the Gecko project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript",
+    "server",
+    "geckos"
+  ],
+  "author": "Elbert Bae, Adam Romeo",
+  "license": "ISC"
+}
