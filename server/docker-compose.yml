@@ -1,13 +1,14 @@
-version: "3"
+version: '3'
 services:
   database:
-    image: "mongo"
-    container_name: "gecko-mongo"
+    image: 'mongo'
+    container_name: 'gecko-mongo'
     environment:
-      - MONGO_INITDB_DATABASE=gecko
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=geckopassword
+      - MONGO_INITDB_DATABASE=geckos
+      - MONGO_INITDB_ROOT_USERNAME=geckos
+      - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./mongo-volume:/data/db
     ports:
-      - "27017-27019:27017-27019"
+      - '27017-27019:27017-27019'
