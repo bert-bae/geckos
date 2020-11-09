@@ -1,13 +1,14 @@
 import { Model } from 'mongoose';
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { User, UserDocument } from '../schemas/user.schema'
+import { User, UserDocument } from './user.schema'
+import { UserDto } from './user.type'
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
 
-  async create(email, password): Promise<Omit<User, 'password'>> {
+  async create(email, password): Promise<UserDto> {
     console.log(`Create user for ${email}`)
     
     let user = await this.userModel.findOne({ email })
@@ -21,7 +22,7 @@ export class UserService {
     return this.stripPassword(user)
   }
 
-  async findOne(id): Promise<Omit<User, 'password'>> {
+  async findOne(id): Promise<UserDto> {
     const user = await this.userModel.findById(id)
 
     if (!user) {
@@ -31,7 +32,11 @@ export class UserService {
     return this.stripPassword(user)
   }
 
-  private stripPassword(user: User): Omit<User, 'password'> {
+  helloUser(name: string) {
+    console.log(`Hello ${name}`)
+  }
+
+  private stripPassword(user: User): UserDto {
     delete user.password;
     return user
   }
