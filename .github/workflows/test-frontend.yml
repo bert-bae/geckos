@@ -25,4 +25,4 @@ jobs:
       - name: Install dependencies
         run: cd client && npm ci
       - name: Run unit tests
-        run: cd client && npm run test --passWithNoTests
+        run: cd client && npm run test
