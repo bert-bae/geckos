@@ -1,0 +1,35 @@
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache Nodejs modules
+        uses: actions/cache@v2
+        with:
+           key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.OS }}-node-
+              ${{ runner.OS }}-
+      - name: Install dependencies
+        run: cd server && npm ci
+      - name: Run unit tests
+        run: cd server && npm run test
