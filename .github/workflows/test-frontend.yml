@@ -23,6 +23,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: cd client && npm ci
+        run: cd packages/client && npm ci
       - name: Run unit tests
-        run: cd client && npm run test
+        run: cd packages/client && npm run test
