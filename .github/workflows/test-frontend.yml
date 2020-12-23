@@ -16,14 +16,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Install mono-repo dependencies
+        run: npm ci
       - uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: list directories
-        run: cd packages/client && ls
       - name: Install dependencies
         run: cd packages/client && npm ci
       - name: Run unit tests
