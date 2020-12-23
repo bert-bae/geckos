@@ -7,9 +7,32 @@ type CreateUserDto {
   email: String!
 }
 
+type RecordDataType {
+  title: String!
+  description: String
+  tags: [String!]
+  createdAt: String!
+  updatedAt: String
+}
+
+type Record {
+  id: ID!
+  creator: ID!
+  type: RecordTypes!
+  data: RecordDataType!
+  parentId: ID
+  children: [Record!]
+}
+
+enum RecordTypes {
+  Epic
+  Task
+}
+
 type Query {
   hello: String!
   getUser(id: String!): CreateUserDto!
+  GetRecord(id: String!): Record!
 }
 
 type Mutation {
