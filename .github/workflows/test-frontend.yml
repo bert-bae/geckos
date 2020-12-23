@@ -22,6 +22,8 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: list directories
+        run: ls
       - name: Install dependencies
         run: cd packages/client && npm ci
       - name: Run unit tests
