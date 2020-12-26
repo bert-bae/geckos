@@ -7,24 +7,24 @@ type CreateUserDto {
   email: String!
 }
 
-type RecordDataType {
+type GeckTaskData {
   title: String!
   description: String
   tags: [String!]
-  createdAt: String!
-  updatedAt: String
 }
 
-type Record {
+type GeckTask {
   id: ID!
   creator: ID!
-  type: RecordTypes!
-  data: RecordDataType!
+  type: GeckTaskTypes!
+  data: GeckTaskData!
   parentId: ID
-  children: [Record!]
+  children: [String!]
+  createdAt: String!
+  updatedAt: String!
 }
 
-enum RecordTypes {
+enum GeckTaskTypes {
   Epic
   Task
 }
@@ -32,11 +32,12 @@ enum RecordTypes {
 type Query {
   hello: String!
   getUser(id: String!): CreateUserDto!
-  GetRecord(id: String!): Record!
+  GetTask(id: String!): GeckTask!
 }
 
 type Mutation {
   createUser(input: UserInput!): CreateUserDto!
+  CreateTask: GeckTask!
 }
 
 input UserInput {

@@ -2,27 +2,28 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
-import config from './config/configurations'
+import { join } from 'path';
 
 import { UserModule } from './users/user.module';
-import { RecordModule } from './records/record.module'
+import { GeckTasksModule } from './geck-tasks/geck-tasks.module'
 
 console.log(process.env.MONGODB_URL);
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [config]
-    }),
+    ConfigModule.forRoot(),
     MongooseModule.forRootAsync({
       useFactory: () => ({
         uri: process.env.MONGODB_URL,
       }),
     }),
     GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql'
+      autoSchemaFile: 'schema.gql',
+      definitions: {
+        path: join(process.cwd(), 'src/graphql.ts'),
+      },
     }),
     UserModule,
-    RecordModule,
+    GeckTasksModule,
   ]
 })
 export class AppModule {}

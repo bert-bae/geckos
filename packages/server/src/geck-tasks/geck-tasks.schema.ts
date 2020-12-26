@@ -16,19 +16,23 @@ export class GeckTask {
   type: GeckTaskTypes
 
   @Prop()
-  parentId: string;
+  parentId?: string;
 
   @Prop()
-  children: string[];
+  children?: string[];
 
   @Prop(raw({
-    title: { type: String, required: true },
+    title: { type: String },
     description: { type: String },
-    tags: { type: [String]},
-    createdAt: { type: String },
-    updatedAt: { type: String }
+    tags: { type: [String]}
   }))
-  data: GeckTaskData
+  data?: GeckTaskData
+
+  @Prop()
+  createdAt: string;
+
+  @Prop()
+  updatedAt?: string;
 }
 
 export const GeckTaskSchema = SchemaFactory.createForClass(GeckTask);

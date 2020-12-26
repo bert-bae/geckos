@@ -15,12 +15,6 @@ class GeckTaskData {
 
   @Field(type => [String], { nullable: true })
   tags: string[];
-
-  @Field()
-  createdAt: string;
-
-  @Field({ nullable: true })
-  updatedAt: string;
 }
 
 @ObjectType()
@@ -40,6 +34,12 @@ export class GeckTask {
   @Field((type) => ID, { nullable: true })
   parentId: string;
 
-  @Field((type) => [GeckTask], { nullable: true })
-  children: GeckTask[];
+  @Field((type) => [String], { nullable: true })
+  children: string[];
+
+  @Field()
+  createdAt: string;
+
+  @Field()
+  updatedAt: string;
 }
