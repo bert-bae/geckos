@@ -5,7 +5,7 @@ import { GeckTasksService } from './geck-tasks.service'
 import { GeckTaskSchema } from './geck-tasks.schema'
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Record', schema: GeckTaskSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'GeckTask', schema: GeckTaskSchema }])],
   providers: [GeckTasksService, GeckTasksResolver],
 })
 export class GeckTasksModule {}

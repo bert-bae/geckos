@@ -7,7 +7,7 @@ type CreateUserDto {
   email: String!
 }
 
-type GeckTaskData {
+type GeckTaskDataObject {
   title: String!
   description: String
   tags: [String!]
@@ -17,7 +17,7 @@ type GeckTask {
   id: ID!
   creator: ID!
   type: GeckTaskTypes!
-  data: GeckTaskData!
+  data: GeckTaskDataObject!
   parentId: ID
   children: [String!]
   createdAt: String!
@@ -29,18 +29,30 @@ enum GeckTaskTypes {
   Task
 }
 
+input GeckTaskDataInput {
+  title: String!
+  description: String
+  tags: [String!]
+}
+
 type Query {
   hello: String!
   getUser(id: String!): CreateUserDto!
-  GetTask(id: String!): GeckTask!
+  getTask(id: String!): GeckTask!
 }
 
 type Mutation {
   createUser(input: UserInput!): CreateUserDto!
-  CreateTask: GeckTask!
+  createTask(input: CreateTask!): GeckTask!
 }
 
 input UserInput {
   email: String!
   password: String!
+}
+
+input CreateTask {
+  type: GeckTaskTypes!
+  parentId: ID
+  data: GeckTaskDataInput!
 }

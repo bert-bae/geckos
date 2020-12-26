@@ -1,12 +1,13 @@
-import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { GeckTaskTypes } from './geck-tasks.types'
 
 registerEnumType(GeckTaskTypes, {
   name: 'GeckTaskTypes'
 })
 
-@ObjectType()
-class GeckTaskData {
+@ObjectType('GeckTaskDataObject')
+@InputType('GeckTaskDataInput')
+export class GeckTaskData {
   @Field()
   title: string;
 

@@ -11,9 +11,21 @@ export enum GeckTaskTypes {
     Task = "Task"
 }
 
+export interface GeckTaskDataInput {
+    title: string;
+    description?: string;
+    tags?: string[];
+}
+
 export interface UserInput {
     email: string;
     password: string;
+}
+
+export interface CreateTask {
+    type: GeckTaskTypes;
+    parentId?: string;
+    data: GeckTaskDataInput;
 }
 
 export interface CreateUserDto {
@@ -21,7 +33,7 @@ export interface CreateUserDto {
     email: string;
 }
 
-export interface GeckTaskData {
+export interface GeckTaskDataObject {
     title: string;
     description?: string;
     tags?: string[];
@@ -31,7 +43,7 @@ export interface GeckTask {
     id: string;
     creator: string;
     type: GeckTaskTypes;
-    data: GeckTaskData;
+    data: GeckTaskDataObject;
     parentId?: string;
     children?: string[];
     createdAt: string;
@@ -41,10 +53,10 @@ export interface GeckTask {
 export interface IQuery {
     hello(): string | Promise<string>;
     getUser(id: string): CreateUserDto | Promise<CreateUserDto>;
-    GetTask(id: string): GeckTask | Promise<GeckTask>;
+    getTask(id: string): GeckTask | Promise<GeckTask>;
 }
 
 export interface IMutation {
     createUser(input: UserInput): CreateUserDto | Promise<CreateUserDto>;
-    CreateTask(): GeckTask | Promise<GeckTask>;
+    createTask(input: CreateTask): GeckTask | Promise<GeckTask>;
 }

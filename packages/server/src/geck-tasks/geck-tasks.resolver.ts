@@ -2,14 +2,14 @@ import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { v4 as uuidv4 } from 'uuid'
 import { GeckTasksService } from './geck-tasks.service'
 import { GeckTask } from './geck-tasks.model'
-import { GeckTask as GeckTaskDefinition } from '../graphql'
+import { CreateTask } from './geck-tasks.input'
 
 @Resolver((of: GeckTask) => GeckTask)
 export class GeckTasksResolver {
   constructor(private readonly geckTasksService: GeckTasksService) {}
 
   @Query(returns => GeckTask)
-  async GetTask(@Args('id') id: string) {
+  async getTask(@Args('id') id: string) {
     return {
       id,
       data: {
@@ -21,7 +21,7 @@ export class GeckTasksResolver {
   }
 
   @Mutation(returns => GeckTask)
-  async CreateTask(input: Omit<GeckTaskDefinition, 'id' | 'creator' | 'children'>) {
+  async createTask(@Args('input') input: CreateTask) {
     const currentDate = new Date().toISOString()
     const geckTask = {
       id: uuidv4(),
@@ -31,5 +31,6 @@ export class GeckTasksResolver {
       ... input
     }
     await this.geckTasksService.create(geckTask)
+    return geckTask
   }
 }
