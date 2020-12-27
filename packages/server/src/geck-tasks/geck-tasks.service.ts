@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { GeckTasksDocument } from './geck-tasks.schema';
 import { GeckTask } from './geck-tasks.model'
-import { HashMap } from '../generic.types'
+import { UpdateTaskInput } from './geck-tasks.input'
 
 // Information on updating nested object properties
 // https://stackoverflow.com/questions/19603542/mongodb-update-data-in-nested-field
@@ -19,7 +19,7 @@ export class GeckTasksService {
     await this.geckTaskModel.create(input)
   }
 
-  async updateOne(_id: string, updateInput: HashMap): Promise<void> {
+  async updateOne(_id: string, updateInput: UpdateTaskInput): Promise<void> {
     await this.geckTaskModel.updateOne({_id}, {
       $set: {
         ...updateInput,

@@ -1,10 +1,9 @@
-import { Resolver, Query, Args, Mutation, InputType, ObjectType } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { v4 as uuidv4 } from 'uuid';
 import { GeckTask } from './geck-tasks.model';
 import { GeckTasksService } from './geck-tasks.service';
 import { ModifiedTaskProperties } from './geck-tasks.dto';
 import { CreateTaskInput, UpdateTaskInput } from './geck-tasks.input';
-import { HashMap } from '../generic.types';
 
 @Resolver((of: GeckTask) => GeckTask)
 export class GeckTasksResolver {
