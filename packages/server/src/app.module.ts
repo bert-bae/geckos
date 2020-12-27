@@ -7,7 +7,6 @@ import { join } from 'path';
 import { UserModule } from './users/user.module';
 import { GeckTasksModule } from './geck-tasks/geck-tasks.module'
 
-console.log(process.env.MONGODB_URL);
 @Module({
   imports: [
     ConfigModule.forRoot(),
