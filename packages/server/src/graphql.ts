@@ -40,7 +40,7 @@ export interface GeckTaskDataObject {
 }
 
 export interface GeckTask {
-    id: string;
+    _id: string;
     creator: string;
     type: GeckTaskTypes;
     data: GeckTaskDataObject;

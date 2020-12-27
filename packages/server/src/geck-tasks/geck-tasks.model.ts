@@ -21,7 +21,7 @@ export class GeckTaskData {
 @ObjectType()
 export class GeckTask {
   @Field((type) => ID)
-  id: string;
+  _id: string;
 
   @Field((type) => ID)
   creator: string;

@@ -8,6 +8,10 @@ import { GeckTask } from '../graphql'
 export class GeckTasksService {
   constructor(@InjectModel('GeckTask') private geckTaskModel: Model<GeckTasksDocument>) {}
 
+  async findById(id: string, projection?: any): Promise<any> {
+    return this.geckTaskModel.findById(id, projection)
+  }
+
   async create(input: GeckTask): Promise<void> {
     await this.geckTaskModel.create(input)
   }

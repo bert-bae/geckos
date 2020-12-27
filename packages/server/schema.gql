@@ -14,7 +14,7 @@ type GeckTaskDataObject {
 }
 
 type GeckTask {
-  id: ID!
+  _id: ID!
   creator: ID!
   type: GeckTaskTypes!
   data: GeckTaskDataObject!

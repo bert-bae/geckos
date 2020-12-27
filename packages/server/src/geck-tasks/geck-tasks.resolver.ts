@@ -10,21 +10,14 @@ export class GeckTasksResolver {
 
   @Query(returns => GeckTask)
   async getTask(@Args('id') id: string) {
-    return {
-      id,
-      data: {
-        description: 'some description',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      }
-    }
+    return this.geckTasksService.findById(id)
   }
 
   @Mutation(returns => GeckTask)
   async createTask(@Args('input') input: CreateTask) {
     const currentDate = new Date().toISOString()
     const geckTask = {
-      id: uuidv4(),
+      _id: uuidv4(),
       creator: 'dummyCreator',
       createdAt: currentDate,
       updatedAt: currentDate,

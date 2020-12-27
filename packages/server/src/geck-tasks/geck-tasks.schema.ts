@@ -7,7 +7,7 @@ export type GeckTasksDocument = GeckTask & Document;
 @Schema()
 export class GeckTask {
   @Prop()
-  id: string;
+  _id: string;
 
   @Prop()
   creator: string;
