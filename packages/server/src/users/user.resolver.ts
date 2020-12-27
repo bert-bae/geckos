@@ -1,13 +1,11 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
-import { UserService } from './user.service'
-import { CreateUserDto } from './dto/user.dto'
-import { UserInput } from './inputs/user.input'
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { UserService } from './user.service';
+import { CreateUserDto } from './dto/user.dto';
+import { UserInput } from './inputs/user.input';
 
 @Resolver()
 export class UserResolver {
-  constructor(
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   @Query(() => String)
   async hello() {
