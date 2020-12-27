@@ -33,6 +33,9 @@ export class GeckTask {
 
   @Prop()
   updatedAt?: string;
+
+  @Prop()
+  deletedAt?: string;
 }
 
 export const GeckTaskSchema = SchemaFactory.createForClass(GeckTask);

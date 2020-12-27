@@ -30,17 +30,20 @@ export class GeckTask {
   type: GeckTaskTypes
 
   @Field((type) => GeckTaskData)
-  data: GeckTaskData;
+  data?: GeckTaskData;
 
   @Field((type) => ID, { nullable: true })
-  parentId: string;
+  parentId?: string;
 
   @Field((type) => [String], { nullable: true })
-  children: string[];
+  children?: string[];
 
   @Field()
   createdAt: string;
 
   @Field()
-  updatedAt: string;
+  updatedAt?: string;
+
+  @Field()
+  deletedAt?: string;
 }

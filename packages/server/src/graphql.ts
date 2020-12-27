@@ -22,10 +22,17 @@ export interface UserInput {
     password: string;
 }
 
-export interface CreateTask {
+export interface CreateTaskInput {
     type: GeckTaskTypes;
     parentId?: string;
     data: GeckTaskDataInput;
+}
+
+export interface UpdateTaskInput {
+    type?: GeckTaskTypes;
+    parentId?: string;
+    children?: string[];
+    data?: GeckTaskDataInput;
 }
 
 export interface CreateUserDto {
@@ -48,6 +55,14 @@ export interface GeckTask {
     children?: string[];
     createdAt: string;
     updatedAt: string;
+    deletedAt: string;
+}
+
+export interface ModifiedTaskProperties {
+    rootTask: string;
+    modifiedProperties: string[];
+    modifiedTasks: string[];
+    deletedTasks: string[];
 }
 
 export interface IQuery {
@@ -58,5 +73,7 @@ export interface IQuery {
 
 export interface IMutation {
     createUser(input: UserInput): CreateUserDto | Promise<CreateUserDto>;
-    createTask(input: CreateTask): GeckTask | Promise<GeckTask>;
+    createTask(input: CreateTaskInput): GeckTask | Promise<GeckTask>;
+    updateTask(updateInput: UpdateTaskInput, id: string): ModifiedTaskProperties | Promise<ModifiedTaskProperties>;
+    softDeleteTask(id: string): ModifiedTaskProperties | Promise<ModifiedTaskProperties>;
 }

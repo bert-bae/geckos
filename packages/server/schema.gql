@@ -22,11 +22,19 @@ type GeckTask {
   children: [String!]
   createdAt: String!
   updatedAt: String!
+  deletedAt: String!
 }
 
 enum GeckTaskTypes {
   Epic
   Task
+}
+
+type ModifiedTaskProperties {
+  rootTask: ID!
+  modifiedProperties: [String!]!
+  modifiedTasks: [String!]!
+  deletedTasks: [String!]!
 }
 
 input GeckTaskDataInput {
@@ -43,7 +51,9 @@ type Query {
 
 type Mutation {
   createUser(input: UserInput!): CreateUserDto!
-  createTask(input: CreateTask!): GeckTask!
+  createTask(input: CreateTaskInput!): GeckTask!
+  updateTask(updateInput: UpdateTaskInput!, id: String!): ModifiedTaskProperties!
+  softDeleteTask(id: String!): ModifiedTaskProperties!
 }
 
 input UserInput {
@@ -51,8 +61,15 @@ input UserInput {
   password: String!
 }
 
-input CreateTask {
+input CreateTaskInput {
   type: GeckTaskTypes!
   parentId: ID
   data: GeckTaskDataInput!
+}
+
+input UpdateTaskInput {
+  type: GeckTaskTypes
+  parentId: String
+  children: [String!]
+  data: GeckTaskDataInput
 }
