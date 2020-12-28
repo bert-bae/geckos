@@ -12,13 +12,13 @@ const useStyles = makeStyles({
   }
 })
 
-type DialogheaderProps = {
+export type DialogHeaderProps = {
   title: string,
   children?: React.ReactNode
   onDialogClose?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const DialogHeader: React.FC<DialogheaderProps> = ({ children, onDialogClose, title }) => {
+const DialogHeader: React.FC<DialogHeaderProps> = ({ children, onDialogClose, title }) => {
   const classes = useStyles()
   
   return (
@@ -33,6 +33,7 @@ const DialogHeader: React.FC<DialogheaderProps> = ({ children, onDialogClose, ti
           </IconButton>
         )}
       </DialogTitle>
+      {children}
     </>
   )
 }

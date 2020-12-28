@@ -21,11 +21,11 @@ const BaseDialog = React.forwardRef<
   const { 
     HeaderComponent,
     FooterComponent,
-    ... materialProps 
+    ...materialProps 
   } = props
 
   return (
-    <Root ref={ref} { ... materialProps }>
+    <Root ref={ref} { ...materialProps }>
       {HeaderComponent && <HeaderComponent />}
       <DialogContent>
         {materialProps.children}
