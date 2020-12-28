@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export type ButtonProps = {
   children: string;
@@ -7,7 +7,7 @@ export type ButtonProps = {
 
 function Button({ children, color }: ButtonProps) {
   return (
-    <button style={{ backgroundColor: color === 'primary' ? 'pink' : 'tan' }}>
+    <button style={{ backgroundColor: color === "primary" ? "pink" : "tan" }}>
       {children}
     </button>
   );
