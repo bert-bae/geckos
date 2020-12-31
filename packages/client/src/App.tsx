@@ -1,6 +1,6 @@
 import React from 'react';
 
-function App() {
+function App(): React.ReactNode {
   return <h1>Hello World!</h1>;
 }
 
