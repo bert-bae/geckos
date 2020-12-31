@@ -7,16 +7,69 @@ type CreateUserDto {
   email: String!
 }
 
+type GeckTaskDataObject {
+  title: String!
+  description: String
+  tags: [String!]
+}
+
+type GeckTask {
+  _id: ID!
+  creator: ID!
+  type: GeckTaskTypes!
+  data: GeckTaskDataObject!
+  parentId: ID
+  children: [String!]
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String!
+}
+
+enum GeckTaskTypes {
+  Epic
+  Task
+}
+
+type ModifiedTaskProperties {
+  rootTask: ID!
+  modifiedProperties: [String!]!
+  modifiedTasks: [String!]!
+  deletedTasks: [String!]!
+}
+
+input GeckTaskDataInput {
+  title: String!
+  description: String
+  tags: [String!]
+}
+
 type Query {
   hello: String!
   getUser(id: String!): CreateUserDto!
+  getTask(id: String!): GeckTask!
 }
 
 type Mutation {
   createUser(input: UserInput!): CreateUserDto!
+  createTask(input: CreateTaskInput!): GeckTask!
+  updateTask(updateInput: UpdateTaskInput!, id: String!): ModifiedTaskProperties!
+  softDeleteTask(id: String!): ModifiedTaskProperties!
 }
 
 input UserInput {
   email: String!
   password: String!
+}
+
+input CreateTaskInput {
+  type: GeckTaskTypes!
+  parentId: ID
+  data: GeckTaskDataInput!
+}
+
+input UpdateTaskInput {
+  type: GeckTaskTypes
+  parentId: String
+  children: [String!]
+  data: GeckTaskDataInput
 }
