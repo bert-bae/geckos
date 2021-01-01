@@ -1,7 +1,21 @@
-import React from 'react';
+import React from "react";
+import {
+  AccordionTask,
+  AccordionTaskSummary,
+  AccordionTaskDetail,
+} from "./shared-components/accordion";
 
 function App() {
-  return <h1>Hello World!</h1>;
+  return (
+    <div>
+      <AccordionTask
+        TaskSummaryProps={{
+          title: "hello",
+          link: "https://www.google.ca",
+        }}
+      />
+    </div>
+  );
 }
 
 export default App;
