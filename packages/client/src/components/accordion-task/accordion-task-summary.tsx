@@ -11,7 +11,7 @@ import ListAltRoundedIcon from "@material-ui/icons/ListAltRounded";
 const Root = AccordionSummary;
 
 export interface ExtendedAccordionSummaryProps {
-  taskType: "Task" | "Epic" | "Bug";
+  type: "Task" | "Epic" | "Bug";
   title: string;
   link?: string;
   onLinkClick?: () => void;
@@ -24,6 +24,14 @@ export type AccordionSummaryProps = Omit<
   ExtendedAccordionSummaryProps;
 
 const useStyles = makeStyles({
+  summaryHeadContainer: {
+    "&:hover": {
+      backgroundColor: "lightgrey",
+    },
+    '&[aria-expanded="true"]': {
+      backgroundColor: "lightgrey",
+    },
+  },
   summaryLink: {
     marginLeft: "5px",
     textDecoration: "none",
@@ -41,11 +49,11 @@ const taskIcons = {
   Bug: <BugReportRoundedIcon fontSize="small" />,
 };
 
-const AccordionContainer = React.forwardRef<
+const AccordionTaskSummary = React.forwardRef<
   React.ElementRef<typeof Root>,
   AccordionSummaryProps
->(function AccordionContainer(props, ref) {
-  const { title, link, taskType, onLinkClick, ...materialProps } = props;
+>(function AccordionTaskSummary(props, ref) {
+  const { title, link, type, onLinkClick, ...materialProps } = props;
   const classes = useStyles();
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -57,9 +65,14 @@ const AccordionContainer = React.forwardRef<
   };
 
   return (
-    <Root ref={ref} expandIcon={<ExpandMoreIcon />} {...materialProps}>
+    <Root
+      ref={ref}
+      className={classes.summaryHeadContainer}
+      expandIcon={<ExpandMoreIcon />}
+      {...materialProps}
+    >
       <Box display="flex" alignItems="center">
-        {taskType ? taskIcons[taskType] : null}
+        {type ? taskIcons[type] : null}
         <a
           className={classes.summaryLink}
           href={link}
@@ -74,4 +87,4 @@ const AccordionContainer = React.forwardRef<
   );
 });
 
-export default AccordionContainer;
+export default AccordionTaskSummary;

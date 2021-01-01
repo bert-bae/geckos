@@ -7,8 +7,12 @@ function App() {
       <AccordionTask
         TaskSummaryProps={{
           title: "hello",
-          taskType: "Task",
+          type: "Task",
           link: "https://www.google.ca",
+        }}
+        TaskDetailProps={{
+          type: "Task",
+          description: "hello world first description",
         }}
       />
     </div>
