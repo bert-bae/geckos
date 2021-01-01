@@ -5,8 +5,8 @@ import React from "react";
 const Root = Dialog;
 
 export interface ExtendedDialogProps {
-  HeaderComponent?: React.ComponentType;
-  FooterComponent?: React.ComponentType;
+  header?: React.ComponentType;
+  footer?: React.ComponentType;
 }
 
 export type DialogProps = Omit<
@@ -17,13 +17,13 @@ export type DialogProps = Omit<
 
 const BaseDialog = React.forwardRef<React.ElementRef<typeof Root>, DialogProps>(
   function BaseDialog(props, ref) {
-    const { HeaderComponent, FooterComponent, ...materialProps } = props;
+    const { header, footer, ...materialProps } = props;
 
     return (
       <Root ref={ref} {...materialProps}>
-        {HeaderComponent && <HeaderComponent />}
+        {header}
         <DialogContent>{materialProps.children}</DialogContent>
-        {FooterComponent && <FooterComponent />}
+        {footer}
       </Root>
     );
   }
