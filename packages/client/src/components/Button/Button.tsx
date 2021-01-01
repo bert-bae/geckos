@@ -5,7 +5,7 @@ export type ButtonProps = {
   color: string;
 };
 
-function Button({ children, color }: ButtonProps) {
+function Button({ children, color }: ButtonProps): React.ReactNode {
   return (
     <button style={{ backgroundColor: color === 'primary' ? 'pink' : 'tan' }}>
       {children}
