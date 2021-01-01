@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  AccordionTask,
-  AccordionTaskSummary,
-  AccordionTaskDetail,
-} from "./shared-components/accordion";
+import { AccordionTask } from "./components/accordion-task";
 
 function App() {
   return (
@@ -11,6 +7,7 @@ function App() {
       <AccordionTask
         TaskSummaryProps={{
           title: "hello",
+          taskType: "Task",
           link: "https://www.google.ca",
         }}
       />

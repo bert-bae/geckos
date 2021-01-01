@@ -4,13 +4,17 @@ import Box from "@material-ui/core/Box";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AssignmentRoundedIcon from "@material-ui/icons/AssignmentRounded";
+import BugReportRoundedIcon from "@material-ui/icons/BugReportRounded";
+import ListAltRoundedIcon from "@material-ui/icons/ListAltRounded";
 
 const Root = AccordionSummary;
 
 export interface ExtendedAccordionSummaryProps {
+  taskType: "Task" | "Epic" | "Bug";
   title: string;
   link?: string;
-  taskIcon?: React.ReactNode;
+  onLinkClick?: () => void;
 }
 
 export type AccordionSummaryProps = Omit<
@@ -21,6 +25,7 @@ export type AccordionSummaryProps = Omit<
 
 const useStyles = makeStyles({
   summaryLink: {
+    marginLeft: "5px",
     textDecoration: "none",
     "&:hover": {
       textDecoration: "underline",
@@ -30,25 +35,41 @@ const useStyles = makeStyles({
   },
 });
 
+const taskIcons = {
+  Task: <AssignmentRoundedIcon fontSize="small" />,
+  Epic: <ListAltRoundedIcon fontSize="small" />,
+  Bug: <BugReportRoundedIcon fontSize="small" />,
+};
+
 const AccordionContainer = React.forwardRef<
   React.ElementRef<typeof Root>,
   AccordionSummaryProps
 >(function AccordionContainer(props, ref) {
-  const { title, link, taskIcon, ...materialProps } = props;
+  const { title, link, taskType, onLinkClick, ...materialProps } = props;
   const classes = useStyles();
 
-  const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
+    if (onLinkClick) {
+      e.preventDefault();
+      onLinkClick();
+    }
   };
 
   return (
     <Root ref={ref} expandIcon={<ExpandMoreIcon />} {...materialProps}>
-      <Box marginRight="5px">{taskIcon}</Box>
-      <a className={classes.summaryLink} href={link} onClick={onLinkClick}>
-        <Typography component="p" variant="subtitle2">
-          {title}
-        </Typography>
-      </a>
+      <Box display="flex" alignItems="center">
+        {taskType ? taskIcons[taskType] : null}
+        <a
+          className={classes.summaryLink}
+          href={link}
+          onClick={handleLinkClick}
+        >
+          <Typography component="p" variant="subtitle2">
+            {title}
+          </Typography>
+        </a>
+      </Box>
     </Root>
   );
 });
