@@ -19,15 +19,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
-    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.{ts,tsx} --fix",
+    "lint:strict": "eslint src/**/*.{ts,tsx} --fix --max-warnings=0",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -47,6 +42,8 @@
     "@storybook/addon-links": "^6.1.10",
     "@storybook/node-logger": "^6.1.10",
     "@storybook/preset-create-react-app": "^3.1.5",
-    "@storybook/react": "^6.1.10"
+    "@storybook/react": "^6.1.10",
+    "@typescript-eslint/parser": "^4.11.0",
+    "eslint-plugin-react": "^7.21.5"
   }
 }
