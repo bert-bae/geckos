@@ -1,5 +1,5 @@
 export type GeckTaskData = {
-  title?: string
+  title?: string;
   description?: string;
   tags?: string[];
 };

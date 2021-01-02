@@ -1,16 +1,16 @@
-import { Field, InputType, ID} from '@nestjs/graphql';
+import { Field, InputType, ID } from '@nestjs/graphql';
 import { GeckTaskData } from './geck-tasks.model';
 import { GeckTaskTypes } from './geck-tasks.types';
 
 @InputType()
 export class CreateTaskInput {
-  @Field((type) => GeckTaskTypes)
+  @Field(() => GeckTaskTypes)
   type: GeckTaskTypes;
-  
-  @Field((type) => ID, { nullable: true })
+
+  @Field(() => ID, { nullable: true })
   parentId?: string;
 
-  @Field((type) => GeckTaskData)
+  @Field(() => GeckTaskData)
   data: GeckTaskData;
 }
 
@@ -20,11 +20,11 @@ export class UpdateTaskInput {
   type?: GeckTaskTypes;
 
   @Field({ nullable: true })
-  parentId?: string
+  parentId?: string;
 
   @Field(() => [String], { nullable: true })
-  children?: string[]
+  children?: string[];
 
   @Field(() => GeckTaskData, { nullable: true })
-  data?: GeckTaskData
+  data?: GeckTaskData;
 }
