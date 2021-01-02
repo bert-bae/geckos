@@ -3,9 +3,7 @@ import MuiTextField from '@material-ui/core/TextField';
 
 const Root = MuiTextField;
 
-export type TextFieldProps = React.ComponentProps<typeof Root> & {
-  extra: string;
-};
+export type TextFieldProps = React.ComponentProps<typeof Root>;
 
 const ForwardedTextField = React.forwardRef<
   React.ElementRef<typeof Root>,
