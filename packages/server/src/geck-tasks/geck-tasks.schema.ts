@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
-import { GeckTaskData, GeckTaskTypes} from './geck-tasks.types'
+import { GeckTaskData, GeckTaskTypes } from './geck-tasks.types';
 import { Document } from 'mongoose';
 
 export type GeckTasksDocument = GeckTask & Document;
@@ -13,7 +13,7 @@ export class GeckTask {
   creator: string;
 
   @Prop()
-  type: GeckTaskTypes
+  type: GeckTaskTypes;
 
   @Prop()
   parentId?: string;
@@ -21,12 +21,14 @@ export class GeckTask {
   @Prop()
   children?: string[];
 
-  @Prop(raw({
-    title: { type: String },
-    description: { type: String },
-    tags: { type: [String]}
-  }))
-  data?: GeckTaskData
+  @Prop(
+    raw({
+      title: { type: String },
+      description: { type: String },
+      tags: { type: [String] }
+    })
+  )
+  data?: GeckTaskData;
 
   @Prop()
   createdAt: string;

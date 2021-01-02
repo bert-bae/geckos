@@ -1,9 +1,15 @@
-import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { GeckTaskTypes } from './geck-tasks.types'
+import {
+  Field,
+  ID,
+  InputType,
+  ObjectType,
+  registerEnumType
+} from '@nestjs/graphql';
+import { GeckTaskTypes } from './geck-tasks.types';
 
 registerEnumType(GeckTaskTypes, {
   name: 'GeckTaskTypes'
-})
+});
 
 @ObjectType('GeckTaskDataObject')
 @InputType('GeckTaskDataInput')
@@ -14,28 +20,28 @@ export class GeckTaskData {
   @Field({ nullable: true })
   description: string;
 
-  @Field(type => [String], { nullable: true })
+  @Field(() => [String], { nullable: true })
   tags: string[];
 }
 
 @ObjectType()
 export class GeckTask {
-  @Field((type) => ID)
+  @Field(() => ID)
   _id: string;
 
-  @Field((type) => ID)
+  @Field(() => ID)
   creator: string;
 
-  @Field((type) => GeckTaskTypes)
-  type: GeckTaskTypes
+  @Field(() => GeckTaskTypes)
+  type: GeckTaskTypes;
 
-  @Field((type) => GeckTaskData)
+  @Field(() => GeckTaskData)
   data?: GeckTaskData;
 
-  @Field((type) => ID, { nullable: true })
+  @Field(() => ID, { nullable: true })
   parentId?: string;
 
-  @Field((type) => [String], { nullable: true })
+  @Field(() => [String], { nullable: true })
   children?: string[];
 
   @Field()

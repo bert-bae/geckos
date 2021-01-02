@@ -10,5 +10,6 @@
     "removeComments": true,
     "sourceMap": true
   },
-  "extends": "../../tsconfig.json"
+  "extends": "../../tsconfig.json",
+  "include": ["src", "test"]
 }

@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
 export type ButtonProps = {
   children: string;
   color: string;
 };
 
-function Button({ children, color }: ButtonProps) {
+function Button({ children, color }: ButtonProps): React.ReactNode {
   return (
-    <button style={{ backgroundColor: color === 'primary' ? 'pink' : 'tan' }}>
+    <button style={{ backgroundColor: color === "primary" ? "pink" : "tan" }}>
       {children}
     </button>
   );
