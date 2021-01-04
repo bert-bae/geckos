@@ -36,7 +36,7 @@ export interface UpdateTaskInput {
 }
 
 export interface CreateUserDto {
-    id: string;
+    _id: string;
     email: string;
 }
 

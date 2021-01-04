@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
 import { CreateUserDto } from './dto/user.dto';
 import { UserInput } from './inputs/user.input';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,10 @@ export class UserService {
 
     let user = await this.userModel.findOne({ email: input.email }).exec();
     if (!user) {
-      user = await this.userModel.create(input);
+      user = await this.userModel.create({
+        ...input,
+        _id: uuid()
+      });
     }
 
     return this.stripPassword(user);
