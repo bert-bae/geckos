@@ -38,28 +38,30 @@ const mockSelectList = [
 export const WithLabel = Template.bind({});
 WithLabel.args = {
   label: 'Number list',
+  value: '',
   selectItems: mockSelectList,
   onChange: () => console.log('Dummy select dropdown change event')
 };
 
 export const WithoutLabel = Template.bind({});
 WithoutLabel.args = {
+  value: '',
   selectItems: mockSelectList,
   onChange: () => console.log('Dummy select dropdown change event')
 };
 
-// Can also use `value` instead of `defaultValue` prop with a set value
 export const WithDefaultValue = Template.bind({});
 WithDefaultValue.args = {
   label: 'Number list',
   selectItems: mockSelectList,
-  defaultValue: mockSelectList[0].value,
+  value: mockSelectList[0].value,
   onChange: () => console.log('Dummy select dropdown change event')
 };
 
 export const WithError = Template.bind({});
 WithError.args = {
   label: 'Number list',
+  value: '',
   selectItems: mockSelectList,
   error: 'Some input error!',
   onChange: () => console.log('Dummy select dropdown change event')

@@ -38,8 +38,10 @@ const SelectDropdown = React.forwardRef<
     <FormControl className={classes.selectContainer} error={!!error}>
       {label && <InputLabel>{label}</InputLabel>}
       <Root ref={ref} label={label} {...materialProps}>
-        {selectItems?.map((item) => (
-          <MenuItem value={item.value}>{item.label}</MenuItem>
+        {selectItems?.map((item, i) => (
+          <MenuItem key={`${item.value}-${i}`} value={item.value}>
+            {item.label}
+          </MenuItem>
         ))}
       </Root>
       {error && <FormHelperText>{error}</FormHelperText>}
