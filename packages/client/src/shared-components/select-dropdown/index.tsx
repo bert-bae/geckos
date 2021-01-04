@@ -17,7 +17,6 @@ const useStyles = makeStyles({
 export interface ExtendedSelectProps {
   selectItems: { value: any; label: string }[];
   error?: string;
-  placeholder?: string;
   label?: string;
 }
 
