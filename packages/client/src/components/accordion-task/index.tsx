@@ -1,1 +1,2 @@
-export { default as AccordionTask } from "./accordion-task";
+export { default } from './accordion-task';
+export * from './accordion-task';

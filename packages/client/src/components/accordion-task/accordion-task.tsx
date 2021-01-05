@@ -1,22 +1,22 @@
-import React from "react";
-import Accordion from "@material-ui/core/Accordion";
+import React from 'react';
+import Accordion from '@material-ui/core/Accordion';
 import AccordionTaskSummary, {
-  ExtendedAccordionSummaryProps,
-} from "./accordion-task-summary";
+  AccordionTaskSummaryProps
+} from './accordion-task-summary';
 import AccordionTaskDetails, {
-  ExtendedAccordionDetailsProps,
-} from "./accordion-task-detail";
+  ExtendedAccordionDetailsProps
+} from './accordion-task-detail';
 
 const Root = Accordion;
 
 export interface ExtendedAccordionProps {
-  TaskSummaryProps: ExtendedAccordionSummaryProps;
+  TaskSummaryProps: AccordionTaskSummaryProps;
   TaskDetailProps: ExtendedAccordionDetailsProps;
 }
 
 export type AccordionProps = Omit<
   React.ComponentProps<typeof Root>,
-  keyof ExtendedAccordionProps | "children"
+  keyof ExtendedAccordionProps | 'children'
 > &
   ExtendedAccordionProps;
 
