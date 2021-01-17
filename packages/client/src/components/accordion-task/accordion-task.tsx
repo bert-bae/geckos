@@ -9,10 +9,7 @@ import AccordionTaskDetails, {
 
 const Root = Accordion;
 
-export type AccordionProps = Omit<
-  React.ComponentProps<typeof Root>,
-  keyof ExtendedAccordionProps | 'children'
-> &
+export type AccordionProps = React.ComponentProps<typeof Root> &
   AccordionTaskSummaryProps &
   ExtendedAccordionDetailsProps;
 
