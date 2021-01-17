@@ -1,13 +1,13 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import AccordionTask, { ExtendedAccordionProps } from './';
+import AccordionTask, { AccordionProps } from './';
 
 export default {
   title: 'AccordionTask',
   component: AccordionTask
 } as Meta;
 
-const Template: Story<ExtendedAccordionProps> = (args) => {
+const Template: Story<AccordionProps> = (args) => {
   return <AccordionTask {...args} />;
 };
 
@@ -16,42 +16,27 @@ const mockDescription =
 
 export const TypeTask = Template.bind({});
 TypeTask.args = {
-  TaskSummaryProps: {
-    title: 'Hello world',
-    link: 'https://www.google.ca',
-    type: 'Task',
-    onLinkClick: () => console.log('Dummy link click')
-  },
-  TaskDetailProps: {
-    type: 'Task',
-    description: mockDescription
-  }
+  title: 'Hello world',
+  link: 'https://www.google.ca',
+  type: 'Task',
+  onLinkClick: () => console.log('Dummy link click'),
+  description: mockDescription
 };
 
 export const TypeEpic = Template.bind({});
 TypeEpic.args = {
-  TaskSummaryProps: {
-    title: 'Hello world',
-    link: 'https://www.google.ca',
-    type: 'Epic',
-    onLinkClick: () => console.log('Dummy link click')
-  },
-  TaskDetailProps: {
-    type: 'Epic',
-    description: mockDescription
-  }
+  title: 'Hello world',
+  link: 'https://www.google.ca',
+  type: 'Epic',
+  onLinkClick: () => console.log('Dummy link click'),
+  description: mockDescription
 };
 
 export const TypeBug = Template.bind({});
 TypeBug.args = {
-  TaskSummaryProps: {
-    title: 'Hello world',
-    link: 'https://www.google.ca',
-    type: 'Bug',
-    onLinkClick: () => console.log('Dummy link click')
-  },
-  TaskDetailProps: {
-    type: 'Bug',
-    description: mockDescription
-  }
+  title: 'Hello world',
+  link: 'https://www.google.ca',
+  type: 'Bug',
+  onLinkClick: () => console.log('Dummy link click'),
+  description: mockDescription
 };
