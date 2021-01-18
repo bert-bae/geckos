@@ -6,5 +6,7 @@ export type GeckTaskData = {
 
 export enum GeckTaskTypes {
   Epic,
-  Task
+  Task,
+  Bug,
+  Root
 }

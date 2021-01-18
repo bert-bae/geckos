@@ -1,3 +1,4 @@
+
 /** ------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
  * -------------------------------------------------------
@@ -7,7 +8,9 @@
 /* eslint-disable */
 export enum GeckTaskTypes {
     Epic = "Epic",
-    Task = "Task"
+    Task = "Task",
+    Bug = "Bug",
+    Root = "Root"
 }
 
 export interface GeckTaskDataInput {
