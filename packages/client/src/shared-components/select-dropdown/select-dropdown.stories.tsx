@@ -1,7 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import SelectDropdown, { SelectDropdownProps } from './';
-import MenuItem from '@material-ui/core/MenuItem';
 
 export default {
   title: 'SelectDropdown',
