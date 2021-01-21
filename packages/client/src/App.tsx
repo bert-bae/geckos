@@ -1,7 +1,14 @@
-import React from "react";
+import React from 'react';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './apollo';
+import Container from './Container';
 
-function App(): React.ReactNode {
-  return <h1>Hello World!</h1>;
+function App() {
+  return (
+    <ApolloProvider client={client}>
+      <Container />
+    </ApolloProvider>
+  );
 }
 
 export default App;
