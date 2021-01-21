@@ -28,6 +28,8 @@ type GeckTask {
 enum GeckTaskTypes {
   Epic
   Task
+  Bug
+  Root
 }
 
 type ModifiedTaskProperties {

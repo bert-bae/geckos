@@ -5,8 +5,8 @@ import React from 'react';
 const Root = Dialog;
 
 export interface ExtendedDialogProps {
-  header?: React.ComponentType;
-  footer?: React.ComponentType;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
 }
 
 export type DialogProps = Omit<
