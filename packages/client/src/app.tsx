@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { client } from './apollo';
+import { client } from 'utils/graphql';
 import TaskPage from 'pages/task';
 
 const App = () => (

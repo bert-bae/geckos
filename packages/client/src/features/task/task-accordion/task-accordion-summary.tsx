@@ -1,9 +1,9 @@
 import React from 'react';
-import { AccordionLinkSummary } from '../../../shared-components/accordion';
+import { GeckTaskTypes } from 'types';
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
 import BugReportRoundedIcon from '@material-ui/icons/BugReportRounded';
 import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';
-import { GeckTaskTypes } from '../../../types';
+import { AccordionLinkSummary } from 'components/accordion';
 
 export interface TaskAccordionSummaryProps {
   type: GeckTaskTypes;
