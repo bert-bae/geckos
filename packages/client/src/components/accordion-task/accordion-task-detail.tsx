@@ -1,11 +1,13 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+import { GeckTaskTypes } from '../../types';
+
 
 const Root = AccordionDetails;
 
 export interface ExtendedAccordionDetailsProps {
-  type: 'Task' | 'Epic' | 'Bug';
+  type: GeckTaskTypes;
   description?: string;
 }
 

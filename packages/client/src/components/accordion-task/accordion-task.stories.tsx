@@ -1,6 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import AccordionTask, { AccordionProps } from './';
+import { GeckTaskTypes } from '../../types';
 
 export default {
   title: 'AccordionTask',
@@ -18,7 +19,7 @@ export const TypeTask = Template.bind({});
 TypeTask.args = {
   title: 'Hello world',
   link: 'https://www.google.ca',
-  type: 'Task',
+  type: GeckTaskTypes.Task,
   onLinkClick: () => console.log('Dummy link click'),
   description: mockDescription
 };
@@ -27,7 +28,7 @@ export const TypeEpic = Template.bind({});
 TypeEpic.args = {
   title: 'Hello world',
   link: 'https://www.google.ca',
-  type: 'Epic',
+  type: GeckTaskTypes.Epic,
   onLinkClick: () => console.log('Dummy link click'),
   description: mockDescription
 };
@@ -36,7 +37,7 @@ export const TypeBug = Template.bind({});
 TypeBug.args = {
   title: 'Hello world',
   link: 'https://www.google.ca',
-  type: 'Bug',
+  type: GeckTaskTypes.Bug,
   onLinkClick: () => console.log('Dummy link click'),
   description: mockDescription
 };
