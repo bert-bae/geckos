@@ -1,8 +1,7 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import { GeckTaskTypes } from '../../types';
-
+import { GeckTaskTypes } from '../../../types';
 
 const Root = AccordionDetails;
 
@@ -17,10 +16,10 @@ export type AccordionDetailsProps = Omit<
 > &
   ExtendedAccordionDetailsProps;
 
-const AccordionTaskDetail = React.forwardRef<
+const TaskAccordionDetail = React.forwardRef<
   React.ElementRef<typeof Root>,
   AccordionDetailsProps
->(function AccordionTaskDetail(props, ref) {
+>(function TaskAccordionDetail(props, ref) {
   const { description, type, ...materialProps } = props;
 
   return (
@@ -34,4 +33,4 @@ const AccordionTaskDetail = React.forwardRef<
   );
 });
 
-export default AccordionTaskDetail;
+export default TaskAccordionDetail;

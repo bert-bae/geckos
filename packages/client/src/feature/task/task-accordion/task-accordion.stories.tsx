@@ -1,15 +1,15 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import AccordionTask, { AccordionProps } from './';
-import { GeckTaskTypes } from '../../types';
+import TaskAccordion, { AccordionProps } from './';
+import { GeckTaskTypes } from '../../../types';
 
 export default {
-  title: 'AccordionTask',
-  component: AccordionTask
+  title: 'TaskAccordion',
+  component: TaskAccordion
 } as Meta;
 
 const Template: Story<AccordionProps> = (args) => {
-  return <AccordionTask {...args} />;
+  return <TaskAccordion {...args} />;
 };
 
 const mockDescription =
