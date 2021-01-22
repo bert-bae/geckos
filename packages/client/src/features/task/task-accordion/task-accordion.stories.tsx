@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import TaskAccordion, { AccordionProps } from './';
-import { GeckTaskTypes } from 'types';
+import { GeckTaskTypes } from 'utils/graphql/types.generated';
 
 export default {
   title: 'TaskAccordion',

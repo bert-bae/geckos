@@ -1,7 +1,7 @@
 import React from 'react';
+import { GeckTaskTypes } from 'utils/graphql/types.generated';
 import Box from '@material-ui/core/Box';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import { GeckTaskTypes } from 'types';
 
 const Root = AccordionDetails;
 
