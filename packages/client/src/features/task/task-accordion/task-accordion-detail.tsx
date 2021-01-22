@@ -1,11 +1,12 @@
 import React from 'react';
+import { GeckTaskTypes } from 'utils/graphql/types.generated';
 import Box from '@material-ui/core/Box';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 
 const Root = AccordionDetails;
 
 export interface ExtendedAccordionDetailsProps {
-  type: 'Task' | 'Epic' | 'Bug';
+  type: GeckTaskTypes;
   description?: string;
 }
 
@@ -15,10 +16,10 @@ export type AccordionDetailsProps = Omit<
 > &
   ExtendedAccordionDetailsProps;
 
-const AccordionTaskDetail = React.forwardRef<
+const TaskAccordionDetail = React.forwardRef<
   React.ElementRef<typeof Root>,
   AccordionDetailsProps
->(function AccordionTaskDetail(props, ref) {
+>(function TaskAccordionDetail(props, ref) {
   const { description, type, ...materialProps } = props;
 
   return (
@@ -32,4 +33,4 @@ const AccordionTaskDetail = React.forwardRef<
   );
 });
 
-export default AccordionTaskDetail;
+export default TaskAccordionDetail;

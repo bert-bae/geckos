@@ -1,7 +1,11 @@
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -13,7 +17,7 @@ export type Scalars = {
 
 export type CreateUserDto = {
   __typename?: 'CreateUserDto';
-  id: Scalars['ID'];
+  _id: Scalars['ID'];
   email: Scalars['String'];
 };
 
@@ -65,11 +69,9 @@ export type Query = {
   getTask: GeckTask;
 };
 
-
 export type QueryGetUserArgs = {
   id: Scalars['String'];
 };
-
 
 export type QueryGetTaskArgs = {
   id: Scalars['String'];
@@ -83,22 +85,18 @@ export type Mutation = {
   softDeleteTask: ModifiedTaskProperties;
 };
 
-
 export type MutationCreateUserArgs = {
   input: UserInput;
 };
-
 
 export type MutationCreateTaskArgs = {
   input: CreateTaskInput;
 };
 
-
 export type MutationUpdateTaskArgs = {
   updateInput: UpdateTaskInput;
   id: Scalars['String'];
 };
-
 
 export type MutationSoftDeleteTaskArgs = {
   id: Scalars['String'];

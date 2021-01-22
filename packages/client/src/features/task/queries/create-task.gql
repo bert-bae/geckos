@@ -1,0 +1,25 @@
+mutation CreateTask(
+  $type: GeckTaskTypes!
+  $title: String!
+  $description: String
+) {
+  createTask(
+    input: {
+      type: $type
+      data: { title: $title, description: $description, tags: [] }
+    }
+  ) {
+    _id
+    creator
+    type
+    data {
+      tags
+      title
+      description
+    }
+    parentId
+    children
+    createdAt
+    updatedAt
+  }
+}

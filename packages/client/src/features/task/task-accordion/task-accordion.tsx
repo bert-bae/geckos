@@ -1,22 +1,22 @@
 import React from 'react';
 import Accordion from '@material-ui/core/Accordion';
-import AccordionTaskSummary, {
-  AccordionTaskSummaryProps
-} from './accordion-task-summary';
-import AccordionTaskDetails, {
+import TaskAccordionSummary, {
+  TaskAccordionSummaryProps
+} from './task-accordion-summary';
+import TaskAccordionDetails, {
   ExtendedAccordionDetailsProps
-} from './accordion-task-detail';
+} from './task-accordion-detail';
 
 const Root = Accordion;
 
 export type AccordionProps = React.ComponentProps<typeof Root> &
-  AccordionTaskSummaryProps &
+  TaskAccordionSummaryProps &
   ExtendedAccordionDetailsProps;
 
-const AccordionTask = React.forwardRef<
+const TaskAccordion = React.forwardRef<
   React.ElementRef<typeof Root>,
   AccordionProps
->(function AccordionTask(props, ref) {
+>(function TaskAccordion(props, ref) {
   const {
     type,
     title,
@@ -27,15 +27,15 @@ const AccordionTask = React.forwardRef<
   } = props;
   return (
     <Root ref={ref} {...materialProps}>
-      <AccordionTaskSummary
+      <TaskAccordionSummary
         type={type}
         title={title}
         link={link}
         onLinkClick={onLinkClick}
       />
-      <AccordionTaskDetails type={type} description={description} />
+      <TaskAccordionDetails type={type} description={description} />
     </Root>
   );
 });
 
-export default AccordionTask;
+export default TaskAccordion;

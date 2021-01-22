@@ -1,5 +1,22 @@
 schema: http://localhost:3000/graphql
+overwrite: true
+
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+
 generates:
-  ./src/types.d.ts:
+  src/utils/graphql/types.generated.ts:
     plugins:
       - typescript
+  src/:
+    documents: '**/*.gql'
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: utils/graphql/types.generated.ts
+      extension: .generated.tsx
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      withHooks: true

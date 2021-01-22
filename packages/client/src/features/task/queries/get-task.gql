@@ -1,0 +1,13 @@
+query GetTask($id: String!) {
+  getTask(id: $id) {
+    _id
+    data {
+      tags
+      title
+      description
+    }
+    children
+    creator
+    createdAt
+  }
+}

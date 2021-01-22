@@ -1,11 +1,11 @@
 import React from 'react';
-import { AccordionLinkSummary } from '../../shared-components/accordion';
+import { GeckTaskTypes } from 'utils/graphql/types.generated';
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
 import BugReportRoundedIcon from '@material-ui/icons/BugReportRounded';
 import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';
-import { GeckTaskTypes } from '../../types';
+import { AccordionLinkSummary } from 'components/accordion';
 
-export interface AccordionTaskSummaryProps {
+export interface TaskAccordionSummaryProps {
   type: GeckTaskTypes;
   title: string;
   link?: string;
@@ -19,7 +19,7 @@ const taskIcons = {
   Root: null
 };
 
-const AccordionTaskSummary: React.FC<AccordionTaskSummaryProps> = ({
+const TaskAccordionSummary: React.FC<TaskAccordionSummaryProps> = ({
   title,
   link,
   type,
@@ -35,4 +35,4 @@ const AccordionTaskSummary: React.FC<AccordionTaskSummaryProps> = ({
   );
 };
 
-export default AccordionTaskSummary;
+export default TaskAccordionSummary;
