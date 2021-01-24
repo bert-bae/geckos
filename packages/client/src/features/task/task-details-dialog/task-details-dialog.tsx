@@ -3,7 +3,11 @@ import TaskDetails, {
   TaskFormProps,
   TaskFormFieldProps
 } from 'features/task/task-details';
-import { DialogHeader, DialogContainer } from 'components/dialog';
+import {
+  DialogHeader,
+  DialogContainer,
+  DialogConfirmationFooter
+} from 'components/dialog';
 
 export type TaskFormDialogProps = {
   open: boolean;
@@ -58,8 +62,16 @@ const TaskDetailsDialog: React.FC<TaskFormDialogProps> = ({
       open={open}
       header={
         <DialogHeader
-          title={`${title ? 'Create' : 'Edit'} ${type}`}
+          title={`${creator ? 'Create' : 'Edit'} ${type}`}
           onDialogClose={onTaskFormDialogClose}
+        />
+      }
+      footer={
+        <DialogConfirmationFooter
+          dismissLabel="Cancel"
+          confirmLabel={creator ? 'Update' : 'Create'}
+          onDismiss={onTaskFormDialogClose}
+          onConfirm={onTaskFormSubmit}
         />
       }
     >

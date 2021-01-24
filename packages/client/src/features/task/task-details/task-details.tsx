@@ -32,8 +32,7 @@ const TaskDetails: React.FC<TaskFormProps> = ({
   description,
   tags,
   creator,
-  onTaskFormChange,
-  onTaskFormSubmit
+  onTaskFormChange
 }) => {
   const typeList = [
     GeckTaskTypes.Epic,
@@ -88,9 +87,6 @@ const TaskDetails: React.FC<TaskFormProps> = ({
           onChange={onTaskFormChange}
           value={creator}
         />
-      </Box>
-      <Box margin="5px 0">
-        <Button onClick={onTaskFormSubmit}>Submit</Button>
       </Box>
     </form>
   );
