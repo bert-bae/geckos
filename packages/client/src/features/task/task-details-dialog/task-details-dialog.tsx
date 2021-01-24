@@ -60,12 +60,7 @@ const TaskDetailsDialog: React.FC<TaskFormDialogProps> = ({
       fullWidth={true}
       maxWidth="lg"
       open={open}
-      header={
-        <DialogHeader
-          title={`${creator ? 'Create' : 'Edit'} ${type}`}
-          onDialogClose={onTaskFormDialogClose}
-        />
-      }
+      header={<DialogHeader title={`${creator ? 'Create' : 'Edit'} ${type}`} />}
       footer={
         <DialogConfirmationFooter
           dismissLabel="Cancel"
