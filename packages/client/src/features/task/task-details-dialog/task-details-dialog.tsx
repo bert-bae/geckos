@@ -10,6 +10,28 @@ export type TaskFormDialogProps = {
   onTaskFormDialogClose: () => void;
 } & TaskFormProps;
 
+// Temp placement of mutation example for use in container components in the future
+
+// const [createTask, { data }] = useCreateTaskMutation();
+
+// const handleFormSubmit = () => {
+//   createTask({ variables: formState });
+// };
+
+// const [formState, setFormState] = React.useState<TaskFormFieldProps>({
+//   title,
+//   description,
+//   tags,
+//   type,
+//   creator
+// });
+
+// const handleTaskFormChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+//   setFormState((prevFormState) => ({
+//     ...prevFormState,
+//     [event.target.name]: event.target.value
+//   }));
+
 const TaskDetailsDialog: React.FC<TaskFormDialogProps> = ({
   open,
   creator,
@@ -29,28 +51,10 @@ const TaskDetailsDialog: React.FC<TaskFormDialogProps> = ({
     type
   };
 
-  // const [createTask, { data }] = useCreateTaskMutation();
-
-  // const handleFormSubmit = () => {
-  //   createTask({ variables: formState });
-  // };
-
-  // const [formState, setFormState] = React.useState<TaskFormFieldProps>({
-  //   title,
-  //   description,
-  //   tags,
-  //   type,
-  //   creator
-  // });
-
-  // const handleTaskFormChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-  //   setFormState((prevFormState) => ({
-  //     ...prevFormState,
-  //     [event.target.name]: event.target.value
-  //   }));
-
   return (
     <DialogContainer
+      fullWidth={true}
+      maxWidth="lg"
       open={open}
       header={
         <DialogHeader

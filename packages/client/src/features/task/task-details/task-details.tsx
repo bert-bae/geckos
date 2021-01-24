@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { GeckTaskTypes } from 'utils/graphql/types.generated';
+import SelectDropdown from 'components/select-dropdown';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -18,38 +19,79 @@ export type TaskFormProps = {
   description?: string;
   tags?: string[];
   creator?: string;
-  onTaskFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onTaskFormChange: (
+    // https://stackoverflow.com/questions/58675993/typescript-react-select-onchange-handler-type-error
+    event: React.ChangeEvent<HTMLInputElement | { value: unknown }>
+  ) => void;
   onTaskFormSubmit: () => void;
 } & TaskFormFieldProps;
 
 const TaskDetails: React.FC<TaskFormProps> = ({
-  // type,
+  type,
   title,
   description,
-  // tags,
-  // creator,
+  tags,
+  creator,
   onTaskFormChange,
   onTaskFormSubmit
 }) => {
+  const typeList = [
+    GeckTaskTypes.Epic,
+    GeckTaskTypes.Task,
+    GeckTaskTypes.Bug
+  ].map((type) => ({
+    value: type,
+    label: type
+  }));
+
   return (
     <form>
-      <Box>
+      <SelectDropdown
+        label="Type"
+        name="type"
+        selectItems={typeList}
+        value={type}
+        onChange={onTaskFormChange}
+      />
+      <Box margin="10px 0">
         <TextField
-          label="title"
+          fullWidth={true}
+          label="Title"
           name="title"
           onChange={onTaskFormChange}
           value={title}
         />
       </Box>
-      <Box>
+      <Box margin="10px 0">
         <TextField
-          label="description"
+          fullWidth={true}
+          label="Description"
           name="description"
           onChange={onTaskFormChange}
           value={description}
         />
       </Box>
-      <Button onClick={onTaskFormSubmit}>Submit</Button>
+      <Box margin="10px 0">
+        <TextField
+          fullWidth={true}
+          label="Tags"
+          name="tags"
+          onChange={onTaskFormChange}
+          value={tags?.join(',')}
+        />
+      </Box>
+      <Box margin="10px 0">
+        <TextField
+          fullWidth={true}
+          label="Creator"
+          name="creator"
+          onChange={onTaskFormChange}
+          value={creator}
+        />
+      </Box>
+      <Box margin="5px 0">
+        <Button onClick={onTaskFormSubmit}>Submit</Button>
+      </Box>
     </form>
   );
 };
