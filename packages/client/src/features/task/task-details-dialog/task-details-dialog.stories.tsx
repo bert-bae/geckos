@@ -1,6 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import TaskDetailsDialog, { TaskFormDialogProps } from './';
+import { GeckTaskTypes } from 'utils/graphql/types.generated';
 
 export default {
   title: 'TaskDetailsDialog',
@@ -19,19 +20,22 @@ const Template: Story<TaskFormDialogProps> = ({
     title: title || '',
     description: description || '',
     tags: tags || [],
-    type: type || 'Epic',
+    type: type || GeckTaskTypes.Epic,
     creator: creator || ''
   });
 
-  const handleTaskFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let value: string | string[] = event.target.value;
-    if (event.target.name === 'tags') {
+  const handleTaskFormChange = (
+    event: React.ChangeEvent<HTMLInputElement | { value: unknown }>
+  ) => {
+    const target = event.target as HTMLInputElement & HTMLSelectElement;
+    let value: string | string[] = target.value;
+    if (target.name === 'tags') {
       value = value.split(',').map((x) => x.trim());
     }
 
     setFormState((prevFormState) => ({
       ...prevFormState,
-      [event.target.name]: value
+      [target.name]: value
     }));
   };
 
@@ -56,7 +60,7 @@ const Template: Story<TaskFormDialogProps> = ({
 
 export const Filled = Template.bind({});
 Filled.args = {
-  type: 'Task',
+  type: GeckTaskTypes.Task,
   title: 'Task number one',
   onTaskFormDialogClose: () => console.log('closed')
 };
