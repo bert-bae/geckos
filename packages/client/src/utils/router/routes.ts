@@ -4,13 +4,11 @@ import { RouteConfig } from './router';
 const routes: RouteConfig[] = [
   {
     path: '/task-list/:id',
-    component: React.lazy(() => import('pages/task-list')),
-    routes: [
-      {
-        path: '/task-list/:id/something',
-        component: React.lazy(() => import('pages/task-details'))
-      }
-    ]
+    component: React.lazy(() => import('pages/task-list'))
+  },
+  {
+    path: '/',
+    component: React.lazy(() => import('pages/task-list'))
   },
   {
     path: '/task-details/:id',
