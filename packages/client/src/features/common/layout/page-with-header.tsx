@@ -12,7 +12,7 @@ const PageWithHeader: React.FC<PageWithHeaderProps> = (props) => {
   return (
     <Box>
       <AppHeader {...appHeaderProps} />
-      {children}
+      <Box m={4}>{children}</Box>
     </Box>
   );
 };

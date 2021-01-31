@@ -9,7 +9,7 @@ export type GetTaskQueryVariables = Types.Exact<{
 export type GetTaskQuery = { __typename?: 'Query' } & {
   getTask: { __typename?: 'GeckTask' } & Pick<
     Types.GeckTask,
-    '_id' | 'children' | 'creator' | 'createdAt'
+    '_id' | 'type' | 'children' | 'creator' | 'createdAt'
   > & {
       data: { __typename?: 'GeckTaskDataObject' } & Pick<
         Types.GeckTaskDataObject,
@@ -27,6 +27,7 @@ export const GetTaskDocument = gql`
         title
         description
       }
+      type
       children
       creator
       createdAt
