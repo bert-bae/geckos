@@ -1,61 +1,94 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { GeckTaskTypes } from 'utils/graphql/types.generated';
+import SelectDropdown from 'components/select-dropdown';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { useCreateTaskMutation } from '../queries/create-task.generated';
 
-// This component is temporary as an example of using the generated hooks
-
-type CreateTaskFormState = {
-  type: GeckTaskTypes;
-  title: string;
-  description: string;
-  tags: string[];
+export type TaskFormFieldProps = {
+  type?: GeckTaskTypes;
+  title?: string;
+  description?: string;
+  tags?: string[];
+  creator?: string;
 };
 
-const formInitialState: CreateTaskFormState = {
-  type: GeckTaskTypes.Epic,
-  title: '',
-  description: '',
-  tags: []
-};
+export type TaskFormProps = {
+  type?: GeckTaskTypes;
+  title?: string;
+  description?: string;
+  tags?: string[];
+  creator?: string;
+  onTaskFormChange: (
+    // https://stackoverflow.com/questions/58675993/typescript-react-select-onchange-handler-type-error
+    event: React.ChangeEvent<HTMLInputElement | { value: unknown }>
+  ) => void;
+  onTaskFormSubmit: () => void;
+} & TaskFormFieldProps;
 
-const TaskDetails = () => {
-  const [createTask, { data }] = useCreateTaskMutation();
-
-  const [formState, setFormState] = React.useState<CreateTaskFormState>(
-    formInitialState
-  );
-
-  const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setFormState((prevFormState) => ({
-      ...prevFormState,
-      [event.target.name]: event.target.value
-    }));
-
-  const handleFormSubmit = () => {
-    createTask({ variables: formState });
-  };
+const TaskDetails: React.FC<TaskFormProps> = ({
+  type,
+  title,
+  description,
+  tags,
+  creator,
+  onTaskFormChange
+}) => {
+  const typeList = [
+    GeckTaskTypes.Epic,
+    GeckTaskTypes.Task,
+    GeckTaskTypes.Bug
+  ].map((type) => ({
+    value: type,
+    label: type
+  }));
 
   return (
-    <>
-      <form>
+    <form>
+      <SelectDropdown
+        label="Type"
+        name="type"
+        selectItems={typeList}
+        value={type}
+        onChange={onTaskFormChange}
+      />
+      <Box margin="10px 0">
         <TextField
-          label="title"
+          fullWidth={true}
+          label="Title"
           name="title"
-          onChange={handleFormChange}
-          value={formState.title}
+          onChange={onTaskFormChange}
+          value={title}
         />
+      </Box>
+      <Box margin="10px 0">
         <TextField
-          label="description"
+          fullWidth={true}
+          label="Description"
           name="description"
-          onChange={handleFormChange}
-          value={formState.description}
+          onChange={onTaskFormChange}
+          value={description}
         />
-        <Button onClick={handleFormSubmit}>Submit</Button>
-      </form>
-      {data && <div>{JSON.stringify(data, null, 2)}</div>}
-    </>
+      </Box>
+      <Box margin="10px 0">
+        <TextField
+          fullWidth={true}
+          label="Tags"
+          name="tags"
+          onChange={onTaskFormChange}
+          value={tags?.join(',')}
+        />
+      </Box>
+      <Box margin="10px 0">
+        <TextField
+          fullWidth={true}
+          label="Creator"
+          name="creator"
+          onChange={onTaskFormChange}
+          value={creator}
+        />
+      </Box>
+    </form>
   );
 };
 
