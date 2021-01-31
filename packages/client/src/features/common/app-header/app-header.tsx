@@ -5,14 +5,17 @@ import Typography from '@material-ui/core/Typography';
 
 export type AppHeaderProps = AppBarProps;
 
-const AppHeader: React.FC<HeaderProps> = () => {
+const AppHeader = React.forwardRef<
+  React.ElementRef<typeof AppBar>,
+  AppHeaderProps
+>((props, ref) => {
   return (
-    <AppBar position="static">
+    <AppBar ref={ref} position="static" {...props}>
       <Box p={1}>
         <Typography variant="h6">Geckos</Typography>
       </Box>
     </AppBar>
   );
-};
+});
 
 export default AppHeader;
