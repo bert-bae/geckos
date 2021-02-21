@@ -12,7 +12,6 @@ export class GeckTasksResolver {
   @Query(() => GeckTask)
   async getTask(@Args('id') id: string) {
     const result = await this.geckTasksService.findById(id);
-    console.log('result >>>', result);
     return result;
   }
 
