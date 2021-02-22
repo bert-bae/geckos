@@ -27,7 +27,7 @@ export class Project {
   @Prop()
   creator: string;
 
-  @Prop(ProjectAccessControl)
+  @Prop()
   accessControl: ProjectAccessControl;
 
   @Prop()

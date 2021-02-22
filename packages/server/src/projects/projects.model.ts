@@ -1,14 +1,15 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 
-@ObjectType()
+@ObjectType('ProjectAccessControlObject')
+@InputType('ProjectAccessControlInput')
 export class ProjectAccessControl {
-  @Field()
+  @Field(() => [String])
   adminAccess: string[];
 
-  @Field()
+  @Field(() => [String])
   readAccess: string[];
 
-  @Field()
+  @Field(() => [String])
   writeAccess: string[];
 }
 

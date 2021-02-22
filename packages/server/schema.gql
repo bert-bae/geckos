@@ -39,23 +39,54 @@ type ModifiedTaskProperties {
   deletedTasks: [String!]!
 }
 
+type ProjectAccessControlObject {
+  adminAccess: [String!]!
+  readAccess: [String!]!
+  writeAccess: [String!]!
+}
+
+type Project {
+  _id: ID!
+  title: String!
+  description: String
+  creator: ID!
+  createdAt: String!
+  updatedAt: String
+  deletedAt: String
+  accessControl: ProjectAccessControlObject!
+}
+
+type ModifiedProjectProperties {
+  _id: ID!
+  modifiedProperties: [String!]!
+  deletedTasks: [String!]!
+}
+
 input GeckTaskDataInput {
   title: String!
   description: String
   tags: [String!]
 }
 
+input ProjectAccessControlInput {
+  adminAccess: [String!]!
+  readAccess: [String!]!
+  writeAccess: [String!]!
+}
+
 type Query {
   hello: String!
   getUser(id: String!): CreateUserDto!
   getTask(id: String!): GeckTask!
+  getProject(id: String!): Project!
 }
 
 type Mutation {
   createUser(input: UserInput!): CreateUserDto!
   createTask(input: CreateTaskInput!): GeckTask!
-  updateTask(updateInput: UpdateTaskInput!, id: String!): ModifiedTaskProperties!
+  updateTask(updateInput: UpdateProjectInput!, id: String!): ModifiedProjectProperties!
   softDeleteTask(id: String!): ModifiedTaskProperties!
+  createProject(input: CreateProjectInput!): Project!
 }
 
 input UserInput {
@@ -69,8 +100,13 @@ input CreateTaskInput {
   data: GeckTaskDataInput!
 }
 
-input UpdateTaskInput {
-  type: GeckTaskTypes
-  parentId: String
-  data: GeckTaskDataInput
+input UpdateProjectInput {
+  title: String!
+  description: ID
+  accessControl: ProjectAccessControlInput!
+}
+
+input CreateProjectInput {
+  title: String!
+  description: ID
 }
