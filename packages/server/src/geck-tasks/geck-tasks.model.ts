@@ -41,8 +41,8 @@ export class GeckTask {
   @Field(() => ID, { nullable: true })
   parentId?: string;
 
-  @Field(() => [String], { nullable: true })
-  children?: string[];
+  @Field(() => [GeckTask])
+  children?: GeckTask[];
 
   @Field()
   createdAt: string;

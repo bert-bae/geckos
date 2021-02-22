@@ -12,7 +12,14 @@ export class GeckTasksResolver {
   @Query(() => GeckTask)
   async getTask(@Args('id') id: string) {
     const result = await this.geckTasksService.findById(id);
-    return result;
+
+    const children = await Promise.all(
+      result.children.map((childId: string) =>
+        this.geckTasksService.findById(childId)
+      )
+    );
+
+    return { ...result.toJSON(), children };
   }
 
   @Mutation(() => GeckTask)
@@ -24,6 +31,7 @@ export class GeckTasksResolver {
       creator: 'dummyCreator',
       createdAt: currentDate,
       updatedAt: currentDate,
+      children: [] as string[],
       ...input
     };
     await this.geckTasksService.create(geckTask);

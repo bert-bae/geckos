@@ -22,9 +22,6 @@ export class UpdateTaskInput {
   @Field({ nullable: true })
   parentId?: string;
 
-  @Field(() => [String], { nullable: true })
-  children?: string[];
-
   @Field(() => GeckTaskData, { nullable: true })
   data?: GeckTaskData;
 }
