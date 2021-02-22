@@ -15,6 +15,7 @@ type GeckTaskDataObject {
 
 type GeckTask {
   _id: ID!
+  projectId: ID!
   creator: ID!
   type: GeckTaskTypes!
   data: GeckTaskDataObject!
@@ -96,6 +97,7 @@ input UserInput {
 
 input CreateTaskInput {
   type: GeckTaskTypes!
+  projectId: ID!
   parentId: ID
   data: GeckTaskDataInput!
 }

@@ -32,6 +32,7 @@ export interface UserInput {
 
 export interface CreateTaskInput {
     type: GeckTaskTypes;
+    projectId: string;
     parentId?: string;
     data: GeckTaskDataInput;
 }
@@ -60,6 +61,7 @@ export interface GeckTaskDataObject {
 
 export interface GeckTask {
     _id: string;
+    projectId: string;
     creator: string;
     type: GeckTaskTypes;
     data: GeckTaskDataObject;

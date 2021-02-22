@@ -9,6 +9,9 @@ export class GeckTask {
   @Prop()
   _id: string;
 
+  @Prop({ required: true, index: true })
+  projectId: string;
+
   @Prop()
   creator: string;
 
