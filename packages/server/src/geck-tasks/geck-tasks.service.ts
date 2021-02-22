@@ -1,8 +1,7 @@
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
-import { GeckTasksDocument } from './geck-tasks.schema';
-import { GeckTask } from './geck-tasks.schema';
+import { GeckTasksDocument, GeckTask } from './geck-tasks.schema';
 
 // Information on updating nested object properties
 // https://stackoverflow.com/questions/19603542/mongodb-update-data-in-nested-field

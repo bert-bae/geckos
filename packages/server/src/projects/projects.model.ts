@@ -1,6 +1,18 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
+export class ProjectAccessControl {
+  @Field()
+  adminAccess: string[];
+
+  @Field()
+  readAccess: string[];
+
+  @Field()
+  writeAccess: string[];
+}
+
+@ObjectType()
 export class Project {
   @Field(() => ID)
   _id: string;
@@ -12,7 +24,7 @@ export class Project {
   description?: string;
 
   @Field(() => ID)
-  owner: string;
+  creator: string;
 
   @Field()
   createdAt: string;
@@ -22,4 +34,7 @@ export class Project {
 
   @Field({ nullable: true })
   deletedAt?: string;
+
+  @Field(() => ProjectAccessControl)
+  accessControl: ProjectAccessControl;
 }

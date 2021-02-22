@@ -6,6 +6,7 @@ import { join } from 'path';
 
 import { UserModule } from './users/user.module';
 import { GeckTasksModule } from './geck-tasks/geck-tasks.module';
+import { ProjectModule } from './projects/projects.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { GeckTasksModule } from './geck-tasks/geck-tasks.module';
       }
     }),
     UserModule,
-    GeckTasksModule
+    GeckTasksModule,
+    ProjectModule
   ]
 })
 export class AppModule {}
