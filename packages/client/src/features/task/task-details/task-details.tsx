@@ -1,8 +1,7 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { GeckTaskTypes } from 'utils/graphql/types.generated';
 import SelectDropdown from 'components/select-dropdown';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 export type TaskFormFieldProps = {

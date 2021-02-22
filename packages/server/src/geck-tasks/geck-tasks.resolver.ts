@@ -11,20 +11,39 @@ export class GeckTasksResolver {
 
   @Query(() => GeckTask)
   async getTask(@Args('id') id: string) {
-    return this.geckTasksService.findById(id);
+    const result = await this.geckTasksService.findById(id);
+
+    const children = await Promise.all(
+      result.children.map((childId: string) =>
+        this.geckTasksService.findById(childId)
+      )
+    );
+
+    return { ...result.toJSON(), children };
   }
 
   @Mutation(() => GeckTask)
   async createTask(@Args('input') input: CreateTaskInput) {
     const currentDate = new Date().toISOString();
+    const newTaskId = uuidv4();
     const geckTask = {
-      _id: uuidv4(),
+      _id: newTaskId,
       creator: 'dummyCreator',
       createdAt: currentDate,
       updatedAt: currentDate,
+      children: [] as string[],
       ...input
     };
     await this.geckTasksService.create(geckTask);
+
+    // Add new task to its parent's children array
+    if (input.parentId) {
+      const parent = await this.geckTasksService.findById(input.parentId);
+      await this.geckTasksService.updateOne(input.parentId, {
+        children: [...parent.children, newTaskId]
+      });
+    }
+
     return geckTask;
   }
 

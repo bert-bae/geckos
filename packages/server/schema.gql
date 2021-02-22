@@ -19,7 +19,7 @@ type GeckTask {
   type: GeckTaskTypes!
   data: GeckTaskDataObject!
   parentId: ID
-  children: [String!]
+  children: [GeckTask!]!
   createdAt: String!
   updatedAt: String!
   deletedAt: String!
@@ -72,6 +72,5 @@ input CreateTaskInput {
 input UpdateTaskInput {
   type: GeckTaskTypes
   parentId: String
-  children: [String!]
   data: GeckTaskDataInput
 }

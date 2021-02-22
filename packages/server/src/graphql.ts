@@ -33,7 +33,6 @@ export interface CreateTaskInput {
 export interface UpdateTaskInput {
     type?: GeckTaskTypes;
     parentId?: string;
-    children?: string[];
     data?: GeckTaskDataInput;
 }
 
@@ -54,7 +53,7 @@ export interface GeckTask {
     type: GeckTaskTypes;
     data: GeckTaskDataObject;
     parentId?: string;
-    children?: string[];
+    children: GeckTask[];
     createdAt: string;
     updatedAt: string;
     deletedAt: string;
