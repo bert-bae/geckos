@@ -7,6 +7,9 @@ export class CreateTaskInput {
   @Field(() => GeckTaskTypes)
   type: GeckTaskTypes;
 
+  @Field(() => ID)
+  projectId: string;
+
   @Field(() => ID, { nullable: true })
   parentId?: string;
 

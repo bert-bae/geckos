@@ -30,6 +30,9 @@ export class GeckTask {
   _id: string;
 
   @Field(() => ID)
+  projectId: string;
+
+  @Field(() => ID)
   creator: string;
 
   @Field(() => GeckTaskTypes)
