@@ -20,8 +20,7 @@ const Template: Story<TaskFormDialogProps> = ({
     title: title || '',
     description: description || '',
     tags: tags || [],
-    type: type || GeckTaskTypes.Epic,
-    creator: creator || ''
+    type: type || GeckTaskTypes.Epic
   });
 
   const handleTaskFormChange = (
@@ -66,7 +65,6 @@ export const Edit = Template.bind({});
 Edit.args = {
   type: GeckTaskTypes.Task,
   title: 'Task number one',
-  creator: 'DummyUser',
   description: 'Some random multiline description',
   tags: ['tagOne', 'tagTwo', 'tagThree'],
   onTaskFormDialogClose: () => console.log('closed')

@@ -19,11 +19,7 @@ export type TaskFormFieldProps = {
 export type TaskFormProps = {
   onTaskFormChange: (
     // https://stackoverflow.com/questions/58675993/typescript-react-select-onchange-handler-type-error
-    event: React.ChangeEvent<
-      | HTMLInputElement
-      | React.KeyboardEvent<HTMLInputElement>
-      | { value: unknown }
-    >
+    event: React.ChangeEvent<HTMLInputElement | { value: unknown }>
   ) => void;
   onTaskFormSubmit: () => void;
 } & TaskFormFieldProps;
