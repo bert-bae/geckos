@@ -29,8 +29,9 @@ const Template: Story<TaskFormDialogProps> = ({
   ) => {
     const target = event.target as HTMLInputElement & HTMLSelectElement;
     let value: string | string[] = target.value;
+
     if (target.name === 'tags') {
-      value = value.split(',').map((x) => x.trim());
+      value = value.split(',');
     }
 
     setFormState((prevFormState) => ({
@@ -58,9 +59,15 @@ const Template: Story<TaskFormDialogProps> = ({
   );
 };
 
-export const Filled = Template.bind({});
-Filled.args = {
+export const Create = Template.bind({});
+Create.args = {};
+
+export const Edit = Template.bind({});
+Edit.args = {
   type: GeckTaskTypes.Task,
   title: 'Task number one',
+  creator: 'DummyUser',
+  description: 'Some random multiline description',
+  tags: ['tagOne', 'tagTwo', 'tagThree'],
   onTaskFormDialogClose: () => console.log('closed')
 };
