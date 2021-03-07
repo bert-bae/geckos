@@ -1,7 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class UserInput {
+export class CreateUserInput {
   @Field()
   readonly email: string;
 

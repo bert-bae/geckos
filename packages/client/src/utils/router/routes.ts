@@ -8,7 +8,11 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/',
-    component: React.lazy(() => import('pages/task-list'))
+    component: React.lazy(() => import('pages/projects'))
+  },
+  {
+    path: '/projects',
+    component: React.lazy(() => import('pages/projects'))
   },
   {
     path: '/task-details/:id',

@@ -2,28 +2,28 @@ import { Model } from 'mongoose';
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { UserDocument } from './user.schema';
-import { CreateUserDto } from './dto/user.dto';
-import { UserInput } from './inputs/user.input';
+import { CreateUserInput } from './user.input';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
 
-  async createUser(input: UserInput): Promise<CreateUserDto> {
+  async createUser(input: CreateUserInput): Promise<UserDocument> {
     const user = await this.userModel.findOne({ email: input.email }).exec();
 
     if (!user) {
       return this.userModel.create({
         ...input,
-        _id: uuid()
+        _id: uuid(),
+        projects: []
       });
     } else {
       throw new Error('User already exists');
     }
   }
 
-  async findOne(id: string): Promise<CreateUserDto> {
+  async findOne(id: string): Promise<UserDocument> {
     const user = await this.userModel.findById(id);
 
     if (!user) {

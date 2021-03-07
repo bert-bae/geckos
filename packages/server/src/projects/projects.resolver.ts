@@ -1,41 +1,56 @@
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, Context } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { Project } from './projects.model';
 import { ProjectsService } from './projects.service';
-// import { GeckTasksService } from '../geck-tasks//geck-tasks.service';
 import { ModifiedProjectProperties } from './projects.dto';
 import { CreateProjectInput, UpdateProjectInput } from './projects.input';
+import { UserService, UserGuard, UserDocument } from 'src/users';
 
 @Resolver((of: Project) => Project)
 export class ProjectResolver {
   constructor(
-    private readonly projectsService: ProjectsService
-  ) // private readonly geckTasksService: GeckTasksService
-  {}
+    private readonly projectsService: ProjectsService,
+    private readonly usersService: UserService
+  ) {}
 
   @Query(() => Project)
-  async getProject(@Args('id') id: string) {
+  @UseGuards(new UserGuard())
+  async getProject(
+    @Args('id') id: string,
+    @Context('user') user: UserDocument
+  ) {
     return this.projectsService.findById(id);
   }
 
+  @Query(() => [Project])
+  @UseGuards(new UserGuard())
+  async getUsersProjects(@Context('user') userCtx: UserDocument) {
+    const user = await this.usersService.findOne(userCtx._id);
+  }
+
   @Mutation(() => Project)
-  async createProject(@Args('input') input: CreateProjectInput) {
+  @UseGuards(new UserGuard())
+  async createProject(
+    @Args('input') input: CreateProjectInput,
+    @Context('user') user: UserDocument
+  ) {
     const currentDate = new Date().toISOString();
     const newProjectId = uuidv4();
     const project: Project = {
       _id: newProjectId,
       title: input.title,
       description: input.description,
-      creator: 'dummyCreator',
+      creator: user._id,
       createdAt: currentDate,
       updatedAt: currentDate,
       accessControl: {
-        adminAccess: ['dummyCreator'],
+        adminAccess: [user._id],
         readAccess: [],
         writeAccess: []
       }
     };
-    await this.projectsService.create(project);
+    await this.projectsService.create(project, user._id);
     return project;
   }
 

@@ -7,7 +7,9 @@ query GetTask($id: String!) {
       description
     }
     type
-    children
+    children {
+      _id
+    }
     creator
     createdAt
   }

@@ -5,23 +5,21 @@ import * as Apollo from '@apollo/client';
 export type CreateTaskMutationVariables = Types.Exact<{
   type: Types.GeckTaskTypes;
   title: Types.Scalars['String'];
+  projectId: Types.Scalars['ID'];
   description?: Types.Maybe<Types.Scalars['String']>;
 }>;
 
 export type CreateTaskMutation = { __typename?: 'Mutation' } & {
   createTask: { __typename?: 'GeckTask' } & Pick<
     Types.GeckTask,
-    | '_id'
-    | 'creator'
-    | 'type'
-    | 'parentId'
-    | 'children'
-    | 'createdAt'
-    | 'updatedAt'
+    '_id' | 'creator' | 'type' | 'parentId' | 'createdAt' | 'updatedAt'
   > & {
       data: { __typename?: 'GeckTaskDataObject' } & Pick<
         Types.GeckTaskDataObject,
         'tags' | 'title' | 'description'
+      >;
+      children: Array<
+        { __typename?: 'GeckTask' } & Pick<Types.GeckTask, '_id'>
       >;
     };
 };
@@ -30,11 +28,13 @@ export const CreateTaskDocument = gql`
   mutation CreateTask(
     $type: GeckTaskTypes!
     $title: String!
+    $projectId: ID!
     $description: String
   ) {
     createTask(
       input: {
         type: $type
+        projectId: $projectId
         data: { title: $title, description: $description, tags: [] }
       }
     ) {
@@ -47,7 +47,9 @@ export const CreateTaskDocument = gql`
         description
       }
       parentId
-      children
+      children {
+        _id
+      }
       createdAt
       updatedAt
     }
@@ -73,6 +75,7 @@ export type CreateTaskMutationFn = Apollo.MutationFunction<
  *   variables: {
  *      type: // value for 'type'
  *      title: // value for 'title'
+ *      projectId: // value for 'projectId'
  *      description: // value for 'description'
  *   },
  * });

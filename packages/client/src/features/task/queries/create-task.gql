@@ -1,11 +1,13 @@
 mutation CreateTask(
   $type: GeckTaskTypes!
   $title: String!
+  $projectId: ID!
   $description: String
 ) {
   createTask(
     input: {
       type: $type
+      projectId: $projectId
       data: { title: $title, description: $description, tags: [] }
     }
   ) {
@@ -18,7 +20,9 @@ mutation CreateTask(
       description
     }
     parentId
-    children
+    children {
+      _id
+    }
     createdAt
     updatedAt
   }
