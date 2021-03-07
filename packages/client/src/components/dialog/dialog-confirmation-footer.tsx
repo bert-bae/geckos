@@ -1,6 +1,6 @@
 import React from 'react';
 import DialogActions from '@material-ui/core/DialogActions';
-import Button from 'components/button';
+import Button from '@material-ui/core/Button';
 import { HTMLButtonElement } from '@ungap/global-this';
 
 export type DialogConfirmationFooterProps = {
@@ -20,7 +20,7 @@ const DialogConfirmationFooter: React.FC<DialogConfirmationFooterProps> = ({
 }) => {
   return (
     <DialogActions>
-      <Button color="primary" disabled={loading} onClick={onDismiss}>
+      <Button color="default" disabled={loading} onClick={onDismiss}>
         {dismissLabel || 'Cancel'}
       </Button>
       <Button color="primary" disabled={loading} onClick={onConfirm}>

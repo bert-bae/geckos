@@ -38,7 +38,6 @@ export type TaskFormDialogProps = {
 
 const TaskDetailsDialog: React.FC<TaskFormDialogProps> = ({
   open,
-  creator,
   description,
   title,
   tags,
@@ -48,7 +47,6 @@ const TaskDetailsDialog: React.FC<TaskFormDialogProps> = ({
   onTaskFormDialogClose
 }) => {
   const formFields: TaskFormFieldProps = {
-    creator,
     description,
     title,
     tags,
@@ -60,11 +58,18 @@ const TaskDetailsDialog: React.FC<TaskFormDialogProps> = ({
       fullWidth={true}
       maxWidth="lg"
       open={open}
-      header={<DialogHeader title={`${creator ? 'Create' : 'Edit'} ${type}`} />}
+      header={
+        <DialogHeader
+          title={`${
+            title ? `Edit ${type?.toLowerCase()}` : 'Create a new task'
+          }`}
+          onDialogClose={onTaskFormDialogClose}
+        />
+      }
       footer={
         <DialogConfirmationFooter
           dismissLabel="Cancel"
-          confirmLabel={creator ? 'Update' : 'Create'}
+          confirmLabel={title ? 'Update' : 'Create'}
           onDismiss={onTaskFormDialogClose}
           onConfirm={onTaskFormSubmit}
         />

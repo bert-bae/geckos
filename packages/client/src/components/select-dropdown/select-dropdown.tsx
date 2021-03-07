@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 export interface ExtendedSelectProps {
-  selectItems: { value: any; label: string }[];
+  selectItems: { value: any; label: any }[];
   error?: string;
   label?: string;
 }
@@ -30,11 +30,15 @@ const SelectDropdown = React.forwardRef<
   React.ElementRef<typeof Root>,
   SelectDropdownProps
 >(function SelectDropdown(props, ref) {
-  const { selectItems, label, error, ...materialProps } = props;
+  const { selectItems, label, error, variant, ...materialProps } = props;
   const classes = useStyles();
 
   return (
-    <FormControl className={classes.selectContainer} error={!!error}>
+    <FormControl
+      variant={variant}
+      className={classes.selectContainer}
+      error={!!error}
+    >
       {label && <InputLabel>{label}</InputLabel>}
       <Root ref={ref} label={label} {...materialProps}>
         {selectItems?.map((item, i) => (
