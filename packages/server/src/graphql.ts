@@ -13,16 +13,27 @@ export enum GeckTaskTypes {
     Root = "Root"
 }
 
+export interface ProjectAccessControlInput {
+    adminAccess: string[];
+    readAccess: string[];
+    writeAccess: string[];
+}
+
 export interface GeckTaskDataInput {
     title: string;
     description?: string;
     tags?: string[];
 }
 
-export interface ProjectAccessControlInput {
-    adminAccess: string[];
-    readAccess: string[];
-    writeAccess: string[];
+export interface CreateProjectInput {
+    title: string;
+    description?: string;
+}
+
+export interface UpdateTaskInput {
+    type?: GeckTaskTypes;
+    parentId?: string;
+    data?: GeckTaskDataInput;
 }
 
 export interface CreateUserInput {
@@ -37,21 +48,33 @@ export interface CreateTaskInput {
     data: GeckTaskDataInput;
 }
 
-export interface UpdateProjectInput {
-    title: string;
-    description?: string;
-    accessControl: ProjectAccessControlInput;
+export interface ProjectAccessControlObject {
+    adminAccess: string[];
+    readAccess: string[];
+    writeAccess: string[];
 }
 
-export interface CreateProjectInput {
+export interface Project {
+    _id: string;
     title: string;
     description?: string;
+    creator: string;
+    createdAt: string;
+    updatedAt?: string;
+    deletedAt?: string;
+    accessControl: ProjectAccessControlObject;
+}
+
+export interface ModifiedProjectProperties {
+    _id: string;
+    modifiedProperties: string[];
+    deletedTasks: string[];
 }
 
 export interface User {
     _id: string;
     email: string;
-    projects: string[];
+    projects?: Project[];
 }
 
 export interface GeckTaskDataObject {
@@ -80,39 +103,17 @@ export interface ModifiedTaskProperties {
     deletedTasks: string[];
 }
 
-export interface ProjectAccessControlObject {
-    adminAccess: string[];
-    readAccess: string[];
-    writeAccess: string[];
-}
-
-export interface Project {
-    _id: string;
-    title: string;
-    description?: string;
-    creator: string;
-    createdAt: string;
-    updatedAt?: string;
-    deletedAt?: string;
-    accessControl: ProjectAccessControlObject;
-}
-
-export interface ModifiedProjectProperties {
-    _id: string;
-    modifiedProperties: string[];
-    deletedTasks: string[];
-}
-
 export interface IQuery {
+    getProject(id: string): Project | Promise<Project>;
+    getUsersProjects(): Project[] | Promise<Project[]>;
     getUser(id: string): User | Promise<User>;
     getTask(id: string): GeckTask | Promise<GeckTask>;
-    getProject(id: string): Project | Promise<Project>;
 }
 
 export interface IMutation {
+    createProject(input: CreateProjectInput): Project | Promise<Project>;
+    updateTask(updateInput: UpdateTaskInput, id: string): ModifiedTaskProperties | Promise<ModifiedTaskProperties>;
     createUser(input: CreateUserInput): User | Promise<User>;
     createTask(input: CreateTaskInput): GeckTask | Promise<GeckTask>;
-    updateTask(updateInput: UpdateProjectInput, id: string): ModifiedProjectProperties | Promise<ModifiedProjectProperties>;
     softDeleteTask(id: string): ModifiedTaskProperties | Promise<ModifiedTaskProperties>;
-    createProject(input: CreateProjectInput): Project | Promise<Project>;
 }
