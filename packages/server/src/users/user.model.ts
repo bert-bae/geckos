@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Project } from 'src/projects';
 
 @ObjectType()
 export class User {
@@ -8,6 +9,6 @@ export class User {
   @Field()
   readonly email: string;
 
-  @Field(() => [String])
-  projects: string[];
+  @Field(() => [Project], { nullable: true })
+  projects: Project[];
 }
