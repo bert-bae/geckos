@@ -20,8 +20,7 @@ const Template: Story<TaskFormDialogProps> = ({
     title: title || '',
     description: description || '',
     tags: tags || [],
-    type: type || GeckTaskTypes.Epic,
-    creator: creator || ''
+    type: type || GeckTaskTypes.Epic
   });
 
   const handleTaskFormChange = (
@@ -29,8 +28,9 @@ const Template: Story<TaskFormDialogProps> = ({
   ) => {
     const target = event.target as HTMLInputElement & HTMLSelectElement;
     let value: string | string[] = target.value;
+
     if (target.name === 'tags') {
-      value = value.split(',').map((x) => x.trim());
+      value = value.split(',');
     }
 
     setFormState((prevFormState) => ({
@@ -58,9 +58,14 @@ const Template: Story<TaskFormDialogProps> = ({
   );
 };
 
-export const Filled = Template.bind({});
-Filled.args = {
+export const Create = Template.bind({});
+Create.args = {};
+
+export const Edit = Template.bind({});
+Edit.args = {
   type: GeckTaskTypes.Task,
   title: 'Task number one',
+  description: 'Some random multiline description',
+  tags: ['tagOne', 'tagTwo', 'tagThree'],
   onTaskFormDialogClose: () => console.log('closed')
 };
