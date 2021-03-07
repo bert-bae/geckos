@@ -104,11 +104,11 @@ input CreateTaskInput {
 
 input UpdateProjectInput {
   title: String!
-  description: ID
+  description: String
   accessControl: ProjectAccessControlInput!
 }
 
 input CreateProjectInput {
   title: String!
-  description: ID
+  description: String
 }

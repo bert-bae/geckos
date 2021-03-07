@@ -1,0 +1,7 @@
+mutation CreateProject($title: String!, $description: String) {
+  createProject(input: { title: $title, description: $description }) {
+    _id
+    title
+    description
+  }
+}

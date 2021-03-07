@@ -1,4 +1,4 @@
-import { Field, InputType, ID } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import { ProjectAccessControl } from './projects.model';
 
 @InputType()
@@ -6,7 +6,7 @@ export class CreateProjectInput {
   @Field()
   title: string;
 
-  @Field(() => ID, { nullable: true })
+  @Field({ nullable: true })
   description?: string;
 }
 
@@ -15,7 +15,7 @@ export class UpdateProjectInput {
   @Field()
   title: string;
 
-  @Field(() => ID, { nullable: true })
+  @Field({ nullable: true })
   description?: string;
 
   @Field(() => ProjectAccessControl)
