@@ -25,7 +25,7 @@ export interface ProjectAccessControlInput {
     writeAccess: string[];
 }
 
-export interface UserInput {
+export interface CreateUserInput {
     email: string;
     password: string;
 }
@@ -48,9 +48,10 @@ export interface CreateProjectInput {
     description?: string;
 }
 
-export interface CreateUserDto {
+export interface User {
     _id: string;
     email: string;
+    projects: string[];
 }
 
 export interface GeckTaskDataObject {
@@ -103,14 +104,13 @@ export interface ModifiedProjectProperties {
 }
 
 export interface IQuery {
-    hello(): string | Promise<string>;
-    getUser(id: string): CreateUserDto | Promise<CreateUserDto>;
+    getUser(id: string): User | Promise<User>;
     getTask(id: string): GeckTask | Promise<GeckTask>;
     getProject(id: string): Project | Promise<Project>;
 }
 
 export interface IMutation {
-    createUser(input: UserInput): CreateUserDto | Promise<CreateUserDto>;
+    createUser(input: CreateUserInput): User | Promise<User>;
     createTask(input: CreateTaskInput): GeckTask | Promise<GeckTask>;
     updateTask(updateInput: UpdateProjectInput, id: string): ModifiedProjectProperties | Promise<ModifiedProjectProperties>;
     softDeleteTask(id: string): ModifiedTaskProperties | Promise<ModifiedTaskProperties>;

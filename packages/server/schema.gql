@@ -2,9 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CreateUserDto {
+type User {
   _id: ID!
   email: String!
+  projects: [String!]!
 }
 
 type GeckTaskDataObject {
@@ -76,21 +77,20 @@ input ProjectAccessControlInput {
 }
 
 type Query {
-  hello: String!
-  getUser(id: String!): CreateUserDto!
+  getUser(id: String!): User!
   getTask(id: String!): GeckTask!
   getProject(id: String!): Project!
 }
 
 type Mutation {
-  createUser(input: UserInput!): CreateUserDto!
+  createUser(input: CreateUserInput!): User!
   createTask(input: CreateTaskInput!): GeckTask!
   updateTask(updateInput: UpdateProjectInput!, id: String!): ModifiedProjectProperties!
   softDeleteTask(id: String!): ModifiedTaskProperties!
   createProject(input: CreateProjectInput!): Project!
 }
 
-input UserInput {
+input CreateUserInput {
   email: String!
   password: String!
 }
