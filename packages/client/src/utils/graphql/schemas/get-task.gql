@@ -9,11 +9,6 @@ query GetTask($id: String!) {
     type
     children {
       _id
-      type
-      projectId
-      data {
-        title
-      }
     }
     creator
     createdAt

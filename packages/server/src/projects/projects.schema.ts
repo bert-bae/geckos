@@ -1,4 +1,4 @@
-import { Schema, SchemaFactory, raw, Prop } from '@nestjs/mongoose';
+import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema()
@@ -14,7 +14,7 @@ class ProjectAccessControl {
 }
 
 @Schema()
-export class Project {
+export class ProjectEntity {
   @Prop()
   _id: string;
 
@@ -40,6 +40,6 @@ export class Project {
   deletedAt?: string;
 }
 
-export type ProjectsDocument = Project & Document;
+export type ProjectsDocument = ProjectEntity & Document;
 
-export const ProjectSchema = SchemaFactory.createForClass(Project);
+export const ProjectSchema = SchemaFactory.createForClass(ProjectEntity);

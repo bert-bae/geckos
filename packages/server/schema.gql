@@ -2,9 +2,33 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CreateUserDto {
+type ProjectAccessControlObject {
+  adminAccess: [String!]!
+  readAccess: [String!]!
+  writeAccess: [String!]!
+}
+
+type Project {
+  _id: ID!
+  title: String!
+  description: String
+  creator: ID!
+  createdAt: String!
+  updatedAt: String
+  deletedAt: String
+  accessControl: ProjectAccessControlObject!
+}
+
+type ModifiedProjectProperties {
+  _id: ID!
+  modifiedProperties: [String!]!
+  deletedTasks: [String!]!
+}
+
+type User {
   _id: ID!
   email: String!
+  projects: [Project!]
 }
 
 type GeckTaskDataObject {
@@ -40,27 +64,10 @@ type ModifiedTaskProperties {
   deletedTasks: [String!]!
 }
 
-type ProjectAccessControlObject {
+input ProjectAccessControlInput {
   adminAccess: [String!]!
   readAccess: [String!]!
   writeAccess: [String!]!
-}
-
-type Project {
-  _id: ID!
-  title: String!
-  description: String
-  creator: ID!
-  createdAt: String!
-  updatedAt: String
-  deletedAt: String
-  accessControl: ProjectAccessControlObject!
-}
-
-type ModifiedProjectProperties {
-  _id: ID!
-  modifiedProperties: [String!]!
-  deletedTasks: [String!]!
 }
 
 input GeckTaskDataInput {
@@ -69,28 +76,33 @@ input GeckTaskDataInput {
   tags: [String!]
 }
 
-input ProjectAccessControlInput {
-  adminAccess: [String!]!
-  readAccess: [String!]!
-  writeAccess: [String!]!
-}
-
 type Query {
-  hello: String!
-  getUser(id: String!): CreateUserDto!
-  getTask(id: String!): GeckTask!
   getProject(id: String!): Project!
+  getUsersProjects: [Project!]!
+  getUser(id: String!): User!
+  getTask(id: String!): GeckTask!
 }
 
 type Mutation {
-  createUser(input: UserInput!): CreateUserDto!
-  createTask(input: CreateTaskInput!): GeckTask!
-  updateTask(updateInput: UpdateProjectInput!, id: String!): ModifiedProjectProperties!
-  softDeleteTask(id: String!): ModifiedTaskProperties!
   createProject(input: CreateProjectInput!): Project!
+  updateTask(updateInput: UpdateTaskInput!, id: String!): ModifiedTaskProperties!
+  createUser(input: CreateUserInput!): User!
+  createTask(input: CreateTaskInput!): GeckTask!
+  softDeleteTask(id: String!): ModifiedTaskProperties!
 }
 
-input UserInput {
+input CreateProjectInput {
+  title: String!
+  description: String
+}
+
+input UpdateTaskInput {
+  type: GeckTaskTypes
+  parentId: String
+  data: GeckTaskDataInput
+}
+
+input CreateUserInput {
   email: String!
   password: String!
 }
@@ -100,15 +112,4 @@ input CreateTaskInput {
   projectId: ID!
   parentId: ID
   data: GeckTaskDataInput!
-}
-
-input UpdateProjectInput {
-  title: String!
-  description: ID
-  accessControl: ProjectAccessControlInput!
-}
-
-input CreateProjectInput {
-  title: String!
-  description: ID
 }
