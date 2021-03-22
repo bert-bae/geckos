@@ -9,11 +9,22 @@ export type GetTaskQueryVariables = Types.Exact<{
 export type GetTaskQuery = { __typename?: 'Query' } & {
   getTask: { __typename?: 'GeckTask' } & Pick<
     Types.GeckTask,
-    '_id' | 'type' | 'children' | 'creator' | 'createdAt'
+    '_id' | 'type' | 'creator' | 'createdAt'
   > & {
       data: { __typename?: 'GeckTaskDataObject' } & Pick<
         Types.GeckTaskDataObject,
         'tags' | 'title' | 'description'
+      >;
+      children: Array<
+        { __typename?: 'GeckTask' } & Pick<
+          Types.GeckTask,
+          '_id' | 'type' | 'projectId'
+        > & {
+            data: { __typename?: 'GeckTaskDataObject' } & Pick<
+              Types.GeckTaskDataObject,
+              'title'
+            >;
+          }
       >;
     };
 };
@@ -28,7 +39,14 @@ export const GetTaskDocument = gql`
         description
       }
       type
-      children
+      children {
+        _id
+        type
+        projectId
+        data {
+          title
+        }
+      }
       creator
       createdAt
     }

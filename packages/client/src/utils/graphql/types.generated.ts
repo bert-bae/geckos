@@ -31,11 +31,12 @@ export type GeckTaskDataObject = {
 export type GeckTask = {
   __typename?: 'GeckTask';
   _id: Scalars['ID'];
+  projectId: Scalars['ID'];
   creator: Scalars['ID'];
   type: GeckTaskTypes;
   data: GeckTaskDataObject;
   parentId?: Maybe<Scalars['ID']>;
-  children?: Maybe<Array<Scalars['String']>>;
+  children: Array<GeckTask>;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
   deletedAt: Scalars['String'];
@@ -56,10 +57,42 @@ export type ModifiedTaskProperties = {
   deletedTasks: Array<Scalars['String']>;
 };
 
+export type ProjectAccessControlObject = {
+  __typename?: 'ProjectAccessControlObject';
+  adminAccess: Array<Scalars['String']>;
+  readAccess: Array<Scalars['String']>;
+  writeAccess: Array<Scalars['String']>;
+};
+
+export type Project = {
+  __typename?: 'Project';
+  _id: Scalars['ID'];
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  creator: Scalars['ID'];
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
+  deletedAt?: Maybe<Scalars['String']>;
+  accessControl: ProjectAccessControlObject;
+};
+
+export type ModifiedProjectProperties = {
+  __typename?: 'ModifiedProjectProperties';
+  _id: Scalars['ID'];
+  modifiedProperties: Array<Scalars['String']>;
+  deletedTasks: Array<Scalars['String']>;
+};
+
 export type GeckTaskDataInput = {
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Scalars['String']>>;
+};
+
+export type ProjectAccessControlInput = {
+  adminAccess: Array<Scalars['String']>;
+  readAccess: Array<Scalars['String']>;
+  writeAccess: Array<Scalars['String']>;
 };
 
 export type Query = {
@@ -67,6 +100,7 @@ export type Query = {
   hello: Scalars['String'];
   getUser: CreateUserDto;
   getTask: GeckTask;
+  getProject: Project;
 };
 
 export type QueryGetUserArgs = {
@@ -77,12 +111,17 @@ export type QueryGetTaskArgs = {
   id: Scalars['String'];
 };
 
+export type QueryGetProjectArgs = {
+  id: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: CreateUserDto;
   createTask: GeckTask;
-  updateTask: ModifiedTaskProperties;
+  updateTask: ModifiedProjectProperties;
   softDeleteTask: ModifiedTaskProperties;
+  createProject: Project;
 };
 
 export type MutationCreateUserArgs = {
@@ -94,12 +133,16 @@ export type MutationCreateTaskArgs = {
 };
 
 export type MutationUpdateTaskArgs = {
-  updateInput: UpdateTaskInput;
+  updateInput: UpdateProjectInput;
   id: Scalars['String'];
 };
 
 export type MutationSoftDeleteTaskArgs = {
   id: Scalars['String'];
+};
+
+export type MutationCreateProjectArgs = {
+  input: CreateProjectInput;
 };
 
 export type UserInput = {
@@ -109,13 +152,18 @@ export type UserInput = {
 
 export type CreateTaskInput = {
   type: GeckTaskTypes;
+  projectId: Scalars['ID'];
   parentId?: Maybe<Scalars['ID']>;
   data: GeckTaskDataInput;
 };
 
-export type UpdateTaskInput = {
-  type?: Maybe<GeckTaskTypes>;
-  parentId?: Maybe<Scalars['String']>;
-  children?: Maybe<Array<Scalars['String']>>;
-  data?: Maybe<GeckTaskDataInput>;
+export type UpdateProjectInput = {
+  title: Scalars['String'];
+  description?: Maybe<Scalars['ID']>;
+  accessControl: ProjectAccessControlInput;
+};
+
+export type CreateProjectInput = {
+  title: Scalars['String'];
+  description?: Maybe<Scalars['ID']>;
 };

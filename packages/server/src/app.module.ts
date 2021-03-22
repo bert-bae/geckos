@@ -3,7 +3,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';
-
 import { UserModule } from './users/user.module';
 import { GeckTasksModule } from './geck-tasks/geck-tasks.module';
 import { ProjectModule } from './projects/projects.module';
