@@ -12,8 +12,7 @@ const Template: Story<TaskFormDialogProps> = ({
   title,
   description,
   tags,
-  type,
-  creator
+  type
 }) => {
   const [open, setOpen] = React.useState(false);
   const [formState, setFormState] = React.useState({
