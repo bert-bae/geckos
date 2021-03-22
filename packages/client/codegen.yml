@@ -1,4 +1,4 @@
-schema: http://localhost:3000/graphql
+schema: http://localhost:4000/graphql
 overwrite: true
 
 hooks:
@@ -15,6 +15,7 @@ generates:
     presetConfig:
       baseTypesPath: utils/graphql/types.generated.ts
       extension: .generated.tsx
+      folder: queries
     plugins:
       - typescript-operations
       - typescript-react-apollo

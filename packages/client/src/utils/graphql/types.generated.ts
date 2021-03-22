@@ -15,11 +15,37 @@ export type Scalars = {
   Float: number;
 };
 
+export type ProjectAccessControlObject = {
+  __typename?: 'ProjectAccessControlObject';
+  adminAccess: Array<Scalars['String']>;
+  readAccess: Array<Scalars['String']>;
+  writeAccess: Array<Scalars['String']>;
+};
+
+export type Project = {
+  __typename?: 'Project';
+  _id: Scalars['ID'];
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  creator: Scalars['ID'];
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
+  deletedAt?: Maybe<Scalars['String']>;
+  accessControl: ProjectAccessControlObject;
+};
+
+export type ModifiedProjectProperties = {
+  __typename?: 'ModifiedProjectProperties';
+  _id: Scalars['ID'];
+  modifiedProperties: Array<Scalars['String']>;
+  deletedTasks: Array<Scalars['String']>;
+};
+
 export type User = {
   __typename?: 'User';
   _id: Scalars['ID'];
   email: Scalars['String'];
-  projects: Array<Scalars['String']>;
+  projects?: Maybe<Array<Project>>;
 };
 
 export type GeckTaskDataObject = {
@@ -58,30 +84,10 @@ export type ModifiedTaskProperties = {
   deletedTasks: Array<Scalars['String']>;
 };
 
-export type ProjectAccessControlObject = {
-  __typename?: 'ProjectAccessControlObject';
+export type ProjectAccessControlInput = {
   adminAccess: Array<Scalars['String']>;
   readAccess: Array<Scalars['String']>;
   writeAccess: Array<Scalars['String']>;
-};
-
-export type Project = {
-  __typename?: 'Project';
-  _id: Scalars['ID'];
-  title: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  creator: Scalars['ID'];
-  createdAt: Scalars['String'];
-  updatedAt?: Maybe<Scalars['String']>;
-  deletedAt?: Maybe<Scalars['String']>;
-  accessControl: ProjectAccessControlObject;
-};
-
-export type ModifiedProjectProperties = {
-  __typename?: 'ModifiedProjectProperties';
-  _id: Scalars['ID'];
-  modifiedProperties: Array<Scalars['String']>;
-  deletedTasks: Array<Scalars['String']>;
 };
 
 export type GeckTaskDataInput = {
@@ -90,17 +96,16 @@ export type GeckTaskDataInput = {
   tags?: Maybe<Array<Scalars['String']>>;
 };
 
-export type ProjectAccessControlInput = {
-  adminAccess: Array<Scalars['String']>;
-  readAccess: Array<Scalars['String']>;
-  writeAccess: Array<Scalars['String']>;
-};
-
 export type Query = {
   __typename?: 'Query';
+  getProject: Project;
+  getUsersProjects: Array<Project>;
   getUser: User;
   getTask: GeckTask;
-  getProject: Project;
+};
+
+export type QueryGetProjectArgs = {
+  id: Scalars['String'];
 };
 
 export type QueryGetUserArgs = {
@@ -111,17 +116,22 @@ export type QueryGetTaskArgs = {
   id: Scalars['String'];
 };
 
-export type QueryGetProjectArgs = {
-  id: Scalars['String'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
+  createProject: Project;
+  updateTask: ModifiedTaskProperties;
   createUser: User;
   createTask: GeckTask;
-  updateTask: ModifiedProjectProperties;
   softDeleteTask: ModifiedTaskProperties;
-  createProject: Project;
+};
+
+export type MutationCreateProjectArgs = {
+  input: CreateProjectInput;
+};
+
+export type MutationUpdateTaskArgs = {
+  updateInput: UpdateTaskInput;
+  id: Scalars['String'];
 };
 
 export type MutationCreateUserArgs = {
@@ -132,17 +142,19 @@ export type MutationCreateTaskArgs = {
   input: CreateTaskInput;
 };
 
-export type MutationUpdateTaskArgs = {
-  updateInput: UpdateProjectInput;
-  id: Scalars['String'];
-};
-
 export type MutationSoftDeleteTaskArgs = {
   id: Scalars['String'];
 };
 
-export type MutationCreateProjectArgs = {
-  input: CreateProjectInput;
+export type CreateProjectInput = {
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+};
+
+export type UpdateTaskInput = {
+  type?: Maybe<GeckTaskTypes>;
+  parentId?: Maybe<Scalars['String']>;
+  data?: Maybe<GeckTaskDataInput>;
 };
 
 export type CreateUserInput = {
@@ -155,15 +167,4 @@ export type CreateTaskInput = {
   projectId: Scalars['ID'];
   parentId?: Maybe<Scalars['ID']>;
   data: GeckTaskDataInput;
-};
-
-export type UpdateProjectInput = {
-  title: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  accessControl: ProjectAccessControlInput;
-};
-
-export type CreateProjectInput = {
-  title: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
 };

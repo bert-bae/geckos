@@ -1,6 +1,0 @@
-query GetUserProjects($id: String!) {
-  getUser(id: $id): {
-    _id
-    projects
-  }
-}
