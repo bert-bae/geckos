@@ -6,17 +6,25 @@ hooks:
     - prettier --write
 
 generates:
-  src/utils/graphql/types.generated.ts:
+  src/utils/graphql/generated/types.ts:
+    documents: 'src/**/**.gql'
     plugins:
       - typescript
-  src/utils/graphql/:
-    documents: '/graphql/schemas/*.gql'
-    preset: near-operation-file
+
+  src/utils/graphql/generated/operations.ts:
+    documents: 'src/**/**.gql'
+    preset: import-types
     presetConfig:
-      baseTypesPath: /types.generated.ts
-      extension: .generated.tsx
+      typesPath: ./types
     plugins:
       - typescript-operations
+
+  src/utils/graphql/generated/hooks.ts:
+    documents: 'src/**/**.gql'
+    preset: import-types
+    presetConfig:
+      typesPath: ./operations
+    plugins:
       - typescript-react-apollo
     config:
       withHooks: true
