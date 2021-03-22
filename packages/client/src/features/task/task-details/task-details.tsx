@@ -1,5 +1,5 @@
 import React from 'react';
-import { GeckTaskTypes } from 'utils/graphql/types.generated';
+import { GeckTaskTypes } from 'utils/graphql/generated/types';
 import SelectDropdown from 'components/select-dropdown';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';

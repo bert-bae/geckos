@@ -2,7 +2,7 @@ import React from 'react';
 import { ISubRoute, withSubRouter } from 'utils/router';
 import PageWithHeader from 'features/common/layout/page-with-header';
 import { TaskAccordion } from 'features/task';
-import { useGetTaskQuery } from 'features/task/queries/get-task.generated';
+import { useGetTaskQuery } from 'utils/graphql/generated/hooks';
 
 interface TaskListPageProps extends ISubRoute {
   id: string;

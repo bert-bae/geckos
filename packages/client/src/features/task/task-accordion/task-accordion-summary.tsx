@@ -1,5 +1,5 @@
 import React from 'react';
-import { GeckTaskTypes } from 'utils/graphql/types.generated';
+import { GeckTaskTypes } from 'utils/graphql/generated/types';
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
 import BugReportRoundedIcon from '@material-ui/icons/BugReportRounded';
 import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';

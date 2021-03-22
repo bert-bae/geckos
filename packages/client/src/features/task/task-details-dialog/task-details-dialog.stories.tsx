@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import TaskDetailsDialog, { TaskFormDialogProps } from './';
-import { GeckTaskTypes } from 'utils/graphql/types.generated';
+import { GeckTaskTypes } from 'utils/graphql/generated/types';
 
 export default {
   title: 'TaskDetailsDialog',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GeckTaskTypes } from 'utils/graphql/types.generated';
+import { GeckTaskTypes } from 'utils/graphql/generated/types';
 import Box from '@material-ui/core/Box';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 
